@@ -1,5 +1,5 @@
 from application.extensions import apimanager
-from application.models.model import User, QuocGia, TinhThanh, KhachHang, HangHoa, HoaDon
+from application.models.model import User, HoaDon
 from application.extensions import auth
 from gatco.exceptions import ServerError
 

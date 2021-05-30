@@ -23,6 +23,13 @@ roles_users = db.Table('roles_users',
 
 
 class Role(CommonModel):
+    """Vai trò của người dùng 
+
+    Attributes:
+        role_name: Tên của vai trò, không dấu (vd: admin, saler, cashier)
+        display_name: Tên hiển thị trên giao diện (vd: Quản trị viên, Nhân viên bán hàng, Thu ngân)
+        description: ghi chú cho vai trò
+    """
     __tablename__ = 'role'
     id = db.Column(Integer, autoincrement=True, primary_key=True)
     role_name = db.Column(String(100), index=True, nullable=False, unique=True)
@@ -30,6 +37,16 @@ class Role(CommonModel):
     description = db.Column(String(255))
 
 class User(CommonModel):
+    """ Người dùng
+
+    Attributes:
+        user_name: Tên người dùng (example: Tien) 
+        full_name: Tên đầy đủ (example: Hoàng Thành Tiến)
+        password: Mật khẩu
+        salt: Mã salt tự gen để mã hóa khẩu
+        is_active: Trạng thái hoạt động của user
+
+    """
     __tablename__ = 'users'
 
     id = db.Column(Integer, autoincrement=True, primary_key=True)
@@ -49,34 +66,68 @@ class User(CommonModel):
         """ Show user object info. """
         return '<User: {}>'.format(self.id)
 
-class QuocGia(CommonModel):
-    __tablename__ = 'quocgia'
-    id = db.Column(Integer, primary_key=True)
-    ma = db.Column(String(255), unique=True)
-    ten = db.Column(String(255), nullable=False)
-    mota = db.Column(String(255), nullable=True)
-    tinhthanh = db.relationship("TinhThanh", order_by="TinhThanh.id", cascade="all, delete-orphan")
+# class QuocGia(CommonModel):
+#     __tablename__ = 'quocgia'
+#     id = db.Column(Integer, primary_key=True)
+#     ma = db.Column(String(255), unique=True)
+#     ten = db.Column(String(255), nullable=False)
+#     mota = db.Column(String(255), nullable=True)
+#     tinhthanh = db.relationship("TinhThanh", order_by="TinhThanh.id", cascade="all, delete-orphan")
     
-class TinhThanh(CommonModel):
-    __tablename__ = 'tinhthanh'
-    id = db.Column(Integer, primary_key=True)
-    ma = db.Column(String(255), unique=True)
-    ten = db.Column(String(255), nullable=False)
-    quocgia_id = db.Column(Integer, ForeignKey('quocgia.id'), nullable=False)
-    quocgia = db.relationship('QuocGia')
+# class TinhThanh(CommonModel):
+#     __tablename__ = 'tinhthanh'
+#     id = db.Column(Integer, primary_key=True)
+#     ma = db.Column(String(255), unique=True)
+#     ten = db.Column(String(255), nullable=False)
+#     quocgia_id = db.Column(Integer, ForeignKey('quocgia.id'), nullable=False)
+#     quocgia = db.relationship('QuocGia')
 
-class KhachHang(CommonModel):
-    __tablename__ = 'khachhang'
+# class KhachHang(CommonModel):
+#     __tablename__ = 'khachhang'
+#     id = db.Column(Integer, primary_key=True)
+#     ma = db.Column(String(255), unique=True)
+#     ten = db.Column(String(255), nullable=False)
+#     quocgia_id = db.Column(Integer, ForeignKey('quocgia.id'), nullable=False)
+#     quocgia = db.relationship('QuocGia')
+#     sodienthoai = db.Column(String(255))
+#     email = db.Column(String(255))
+#     diachi = db.Column(String(255))
+
+class LoaiGianHang(CommonModel):
+    """Loại gian hàng
+
+    Attributes:
+        ten_loaigianhang: Tên loại gian hàng (Gian hàng "Công nghệ", "Thực phẩm")
+    """
+    __tablename__ = 'loaigianhang'
     id = db.Column(Integer, primary_key=True)
-    ma = db.Column(String(255), unique=True)
-    ten = db.Column(String(255), nullable=False)
-    quocgia_id = db.Column(Integer, ForeignKey('quocgia.id'), nullable=False)
-    quocgia = db.relationship('QuocGia')
-    sodienthoai = db.Column(String(255))
-    email = db.Column(String(255))
-    diachi = db.Column(String(255))
+    ten_loaigianhang = db.Column(String(255))
+
+class GianHang(CommonModel):
+    """Gian hàng
+
+    Attributes:
+        ma_gian_hang: Mã gian hàng 
+        ten_gian_hang: Tên gian hàng
+        loai_gian_hang_id: Khóa ngoại tới loại gian hàng
+
+    """
+    __tablename__ = 'gianhang'
+    id = db.Column(Integer, primary_key=True)
+    ma_gian_hang = db.Column(String(255), unique=True)
+    ten_gian_hang = db.Column(String(255), nullable=False)
+    loai_gian_hang_id = db.Column(Integer, ForeignKey('loaigianhang.id'), nullable=False)
+    loai_gian_hang = db.relationship("LoaiGianHang")
 
 class HangHoa(CommonModel):
+    """Hàng hóa
+
+    Attributes:
+        ma : Mã hàng hóa 
+        ten: Tên hàng hóa
+        gia: Giá hàng hóa
+        ghichu: Ghi chú cho hàng hóa
+    """
     __tablename__ = 'hanghoa'
     id = db.Column(Integer, primary_key=True)
     ma = db.Column(String(255), unique=True)
@@ -85,12 +136,25 @@ class HangHoa(CommonModel):
     ghichu = db.Column(String(255))
 
 class HoaDon(CommonModel):
+    """Hóa đơn
+
+    Attributes:
+        ma : Mã đơn hàng
+        ghichu: Ghi chú với đơn hàng
+        khachhang_id: Khóa ngoại liên kết tới người mua (Đang để liên kết tới bảng users, không phải bảng khach_hang) 
+        ngaymua: Ngày mua
+        thanhtien: Thành tiền, sau khi đã tính thuế, hoặc chiết khấu (nếu có)
+        vat: Thuế giá trị gia tăng, default = 10, nếu = 10 thì tức là vat = 10 %
+        tongtien: Tổng tiền trong hóa đơn chưa trừ thuế
+        chitiethoadon: relationship đến các mặt hàng trong hóa đơn
+    """
     __tablename__ = 'hoadon'
     id = db.Column(Integer, primary_key=True)
     ma = db.Column(String(255), unique=True)
     ghichu = db.Column(String(255))
-    khachhang_id = db.Column(Integer, ForeignKey('khachhang.id'), nullable=False)
-    tenkhachhang = db.Column(String(255))
+    khachhang_id = db.Column(Integer, ForeignKey('users.id'), nullable=False)
+    # tenkhachhang = db.Column(String(255))
+    khach_hang = db.relationship("User")
     ngaymua = db.Column(DateTime)
 
     thanhtien = db.Column(DECIMAL)
@@ -100,15 +164,22 @@ class HoaDon(CommonModel):
     chitiethoadon = db.relationship("ChiTietHoaDon", order_by="ChiTietHoaDon.id", cascade="all, delete-orphan", lazy='dynamic')
 
 class ChiTietHoaDon(CommonModel):
+    """
+
+    Attributes:
+        hoadon_id: Khóa ngoại liên kết tới hóa đơn (quan hệ 1 hóa đơn - n chi tiết hóa đơn)
+        hanghoa_id: Khóa ngoại tới mặt hàng
+        soluong: Số lượng hàng hóa
+        dongia: Đơn giá/1 hàng hóa, mỗi lần tạo đơn thì lưu thông tin giá hàng hóa tại thời điêm đó vào đây
+        thanhtien: Tổng tiền của hàng hóa = đơn giá * số lượng 
+    """
     __tablename__ = 'chitiethoadon'
     id = db.Column(Integer, primary_key=True)
     hoadon_id = db.Column(Integer, ForeignKey('hoadon.id'), nullable=False)
 
     hanghoa_id = db.Column(Integer, ForeignKey('hanghoa.id'), nullable=False)
-    mahanghoa = db.Column(String(255))
-    tenhanghoa = db.Column(String(255))
-
-    soluong = db.Column(Integer)
+    hanghoa = db.relationship("HangHoa")
+    soluong = db.Column(DECIMAL(), nullable=False)
     dongia = db.Column(Integer)
     thanhtien = db.Column(Integer)
     

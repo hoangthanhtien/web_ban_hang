@@ -39,8 +39,8 @@
         "type": "number"
     },
     "vat": {
-        "default": 10,
-        "type": "number"
+        "type": "number",
+        "default": 10
     },
     "tongtien": {
         "type": "number"
