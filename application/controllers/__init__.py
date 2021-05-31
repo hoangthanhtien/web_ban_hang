@@ -6,6 +6,9 @@ def init_views(app):
     import application.controllers.user
     import application.controllers.hanghoa
     import application.controllers.hoadon
+    import application.controllers.chitiethoadon
+    import application.controllers.gianhang
+    import application.controllers.loaigianhang
     
     @app.route('/')
     def index(request):
