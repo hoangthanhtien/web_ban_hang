@@ -110,6 +110,7 @@ class GianHang(CommonModel):
         ma_gian_hang: Mã gian hàng 
         ten_gian_hang: Tên gian hàng
         loai_gian_hang_id: Khóa ngoại tới loại gian hàng
+        chu_gian_hang_id: Khóa ngoại tới chủ gian hàng
 
     """
     __tablename__ = 'gianhang'
@@ -117,7 +118,9 @@ class GianHang(CommonModel):
     ma_gian_hang = db.Column(String(255), unique=True)
     ten_gian_hang = db.Column(String(255), nullable=False)
     loai_gian_hang_id = db.Column(Integer, ForeignKey('loaigianhang.id'), nullable=False)
-    loai_gian_hang = db.relationship("LoaiGianHang")
+    loai_gian_hang = db.relationship("LoaiGianHang", foreign_keys=[loai_gian_hang_id])
+    chu_gian_hang_id = db.Column(Integer, ForeignKey('users.id'), nullable=False)
+    chu_gian_hang = db.relationship("User", foreign_keys=[chu_gian_hang_id])
 
 class HangHoa(CommonModel):
     """Hàng hóa
@@ -127,6 +130,7 @@ class HangHoa(CommonModel):
         ten: Tên hàng hóa
         gia: Giá hàng hóa
         ghichu: Ghi chú cho hàng hóa
+        gianhang_uid: Khóa ngoại tới gian hàng (Chỉ ra sản phẩm này thuộc gian hàng nào)
     """
     __tablename__ = 'hanghoa'
     id = db.Column(Integer, primary_key=True)
@@ -134,6 +138,8 @@ class HangHoa(CommonModel):
     ten = db.Column(String(255), nullable=False)
     gia = db.Column(Integer)
     ghichu = db.Column(String(255))
+    gianhang_uid = db.Column(Integer, ForeignKey('gianhang.id'),nullable=False)
+    gianhang = db.relationship("GianHang")
 
 class HoaDon(CommonModel):
     """Hóa đơn
@@ -183,3 +189,6 @@ class ChiTietHoaDon(CommonModel):
     dongia = db.Column(Integer)
     thanhtien = db.Column(Integer)
     
+class GioHang(CommonModel):
+    __table_name__ = 'giohang'
+    id = db.Column(Integer, primary_key=True)

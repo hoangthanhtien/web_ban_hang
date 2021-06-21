@@ -31,5 +31,12 @@
     "ghichu": {
         "type": "string",
         "length": 255
+    },
+    "gianhang_uid": {
+        "type": "number",
+        "required": true
+    },
+    "gianhang": {
+        "type": "dict"
     }
 }

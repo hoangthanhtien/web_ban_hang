@@ -11,7 +11,7 @@ define(function(require) {
 	};
 	
 	return Gonrin.FilterView.extend({
-    	template : `<div><input type="text" filter-bind="value:text" placeholder="Tìm kiếm..."/></div>`,
+    	template : `<div><input type="text" filter-bind="value:text" placeholder="Nhập để tìm kiếm ..."/></div>`,
     	modelSchema	: filterschema,
     	urlPrefix: "/api/v1/",
     	collectionName: "filter",

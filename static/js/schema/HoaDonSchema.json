@@ -28,10 +28,6 @@
         "type": "number",
         "required": true
     },
-    "tenkhachhang": {
-        "type": "string",
-        "length": 255
-    },
     "ngaymua": {
         "type": "datetime"
     },
@@ -44,6 +40,9 @@
     },
     "tongtien": {
         "type": "number"
+    },
+    "khach_hang": {
+        "type": "dict"
     },
     "chitiethoadon": {
         "type": "list"

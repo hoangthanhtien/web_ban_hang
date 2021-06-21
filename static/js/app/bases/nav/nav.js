@@ -1,65 +1,93 @@
 define(function (require) {
 	"use strict";
 	return [
+		// {
+		// 	"text":"Quản lý đơn vị",
+		// 	// "icon":"fa fa-child",
+		// 	"type":"view",
+		// 	"route":"organization/collection",
+		// 	"visible": function(){
+		// 		return this.getApp().checkRole("system_admin");
+		// 	}
+		// },
 		{
-			"text":"Quốc gia",
-			"icon":"fa fa-child",
+			"text":"Quản lý phòng ban",
+			// "icon":"fa fa-child",
 			"type":"view",
-			"collectionName":"quocgia",
-		    "route":"quocgia/collection"
+			"route":"organization_user_group/collection"
 		},
 		{
-			"text":"Tỉnh thành",
-			"icon":"fa fa-child",
+			"text":"Danh sách người dùng",
+			// "icon":"fa fa-child",
 			"type":"view",
-			"collectionName":"tinhthanh",
-		    "route":"tinhthanh/collection"
-		},
-
-		{
-			"text":"Khách hàng",
-			"icon":"fa fa-child",
-			"type":"view",
-			"collectionName":"khachhang",
-		    "route":"khachhang/collection"
+			"route":"organization_contact_relation/collection"
 		},
 		{
-			"text":"Hàng hoá",
-			"icon":"fa fa-child",
+			"text":"Quản lý đơn quà tặng",
+			// "icon":"fa fa-child",
 			"type":"view",
-			"collectionName":"hanghoa",
-		    "route":"hanghoa/collection"
+			"route":"procurement_group/collection"
 		},
 		{
-			"text":"Hoá đơn",
-			"icon":"fa fa-child",
+			"text":"Quản lý đơn theo kỳ",
+			// "icon":"cil-calendar",
 			"type":"view",
-			"collectionName":"hoadon",
-		    "route":"hoadon/collection"
+			"route":"procurement_group_by_time/collection"
 		},
 		{
-			"text":"Hệ thống",
-			"icon":"fa fa-child",
-			"type": "category",
+			"text":"Báo cáo tổng hợp",
+			// "icon":"cil-calendar",
+			"type":"view",
+			"route":"organization_report/collection"
+		},
+		{
+			"text":"Báo cáo mua trước trả sau",
+			// "icon":"cil-calendar",
+			"type":"view",
+			"route":"organization_debit_report/collection"
+		},
+		{
+			"text":"Lịch sử đặt hàng",
+			// "icon":"cil-calendar",
+			"type":"category",
+			// "route":"procurement_group_by_time/collection", 
 			"entries": [
 				{
-					"text":"Người dùng",
-					"icon":"fa fa-child",
+					"text":"Đơn quà tặng",
+					// "icon":"cil-calendar",
 					"type":"view",
-					"collectionName":"user",
-					"route":"user/collection"
+					"route":"procurement_group_history/collection"
 				},
 				{
-					"text":"Vai trò",
-					"icon":"fa fa-child",
+					"text":"Đơn theo kỳ",
+					// "icon":"cil-calendar",
 					"type":"view",
-					"collectionName":"user",
-					"route":"role/collection"
+					"route":"procurement_group_by_time_history/collection"
 				},
 			]
 		},
-
+		{
+			"text":"Quản lý hoá đơn",
+			// "icon":"cil-calendar",
+			"type":"category",
+			// "route":"procurement_group_by_time/collection", 
+			"entries": [
+				{
+					"text":"Đơn quà tặng",
+					// "icon":"cil-calendar",
+					"type":"view",
+					"route":"salesorder/collection"
+				},
+				{
+					"text":"Đơn theo kỳ",
+					// "icon":"cil-calendar",
+					"type":"view",
+					"route":"procurement_group_by_time_invoice/collection"
+				},
+			]
+		},
 		
 	];
 
 });
+

@@ -7,18 +7,18 @@ define(function (require) {
     
     var routedata = require('app/bases/nav/route');
     var LoginView = require('app/bases/views/LoginView');
-    var QuocgiaCollectionView = require('app/view/QuocGia/CollectionView');
+    // var QuocgiaCollectionView = require('app/view/QuocGia/CollectionView');
     
     return Gonrin.Router.extend({
         routes: {
         	"index" : "index",
             "login":"login",
             "logout": "logout",
-//            "forgot":"forgotPassword",
-//            "dangky":"dangky",
+            "forgot":"forgotPassword",
+            "dangky":"dangky",
             "error":"error_page",
-            "quocgia/collection": "quocgia_collection",
-            "*path":  "defaultRoute"
+            // "quocgia/collection": "quocgia_collection",
+            // "*path":  "defaultRoute"
         },
         defaultRoute:function(){
             console.log("defaultRoute");
@@ -26,21 +26,21 @@ define(function (require) {
         },
         index:function(){
         },
-        quocgia_collection: function(){
-            var self = this;
-            console.log("quocgia collection");
-            var view = new QuocgiaCollectionView({el: self.getApp().$content});
-            view.render();
-        },
+        // quocgia_collection: function(){
+        //     var self = this;
+        //     console.log("quocgia collection");
+        //     var view = new QuocgiaCollectionView({el: self.getApp().$content});
+        //     view.render();
+        // },
         login: function () {
             console.log("Chay login function tai router.js");
-            var loginview = new LoginView({ el: $('body') });
+            var loginview = new LoginView({ el: $('#body-container') });
             loginview.render();
         },
         logout: function () {
             var self = this;
             $.ajax({
-                url: self.getApp().serviceURL + '/api/logout',
+                url: self.getApp().serviceURL + '/organization/user/logout',
                 dataType: "json",
                 success: function (data) {
                     self.navigate("login");

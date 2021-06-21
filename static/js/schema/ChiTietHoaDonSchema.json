@@ -24,21 +24,17 @@
         "type": "number",
         "required": true
     },
-    "mahanghoa": {
-        "type": "string",
-        "length": 255
-    },
-    "tenhanghoa": {
-        "type": "string",
-        "length": 255
-    },
     "soluong": {
-        "type": "number"
+        "type": "number",
+        "required": true
     },
     "dongia": {
         "type": "number"
     },
     "thanhtien": {
         "type": "number"
+    },
+    "hanghoa": {
+        "type": "dict"
     }
 }
