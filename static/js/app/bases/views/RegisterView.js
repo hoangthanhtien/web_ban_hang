@@ -5,34 +5,35 @@ define(function (require) {
     Gonrin = require("gonrin");
 
   var template = require("text!app/bases/tpl/register.html"),
-    schema = require("json!schema/UserDonviSchema.json");
+    // schema = require("json!schema/UserDonviSchema.json");
+    schema = require("json!schema/UserSchema.json");
 
-  var TuyenDonViSelectView = require("app/view/HeThong/DangKyDonVi/view/SelectViewTuyenDonVi");
-  var DonViSelectView = require("app/view/HeThong/DangKyDonVi/view/SelectViewDonVi");
+  //   var TuyenDonViSelectView = require("app/view/HeThong/DangKyDonVi/view/SelectViewTuyenDonVi");
+  // var DonViSelectView = require("app/view/HeThong/DangKyDonVi/view/SelectViewDonVi");
 
   return Gonrin.ModelView.extend({
     template: template,
     modelSchema: schema,
     urlPrefix: "/api/v1/",
-    collectionName: "user_donvi",
+    collectionName: "register",
     uiControl: {
       fields: [
-        {
-          field: "captren",
-          uicontrol: "ref",
-          textField: "ten",
-          foreignRemoteField: "id",
-          foreignField: "captren_id",
-          dataSource: DonViSelectView,
-        },
-        {
-          field: "donvi_tuyendonvi",
-          uicontrol: "ref",
-          textField: "ten",
-          foreignRemoteField: "id",
-          foreignField: "donvi_tuyendonvi_id",
-          dataSource: TuyenDonViSelectView,
-        },
+        // {
+        //   field: "captren",
+        //   uicontrol: "ref",
+        //   textField: "ten",
+        //   foreignRemoteField: "id",
+        //   foreignField: "captren_id",
+        //   dataSource: DonViSelectView,
+        // },
+        // {
+        //   field: "donvi_tuyendonvi",
+        //   uicontrol: "ref",
+        //   textField: "ten",
+        //   foreignRemoteField: "id",
+        //   foreignField: "donvi_tuyendonvi_id",
+        //   dataSource: TuyenDonViSelectView,
+        // },
       ],
     },
     tools: [
@@ -70,15 +71,12 @@ define(function (require) {
                     { type: "danger" }
                   );
               } else if (pass == null || pass != cfpass) {
-                self
-                  .getApp()
-                  .notify(
-                    {
-                      message:
-                        "Password không được để trống of không giống nhau",
-                    },
-                    { type: "danger" }
-                  );
+                self.getApp().notify(
+                  {
+                    message: "Password không được để trống of không giống nhau",
+                  },
+                  { type: "danger" }
+                );
               } else {
                 self.model.save(null, {
                   success: function (model, respose, options) {
@@ -97,21 +95,26 @@ define(function (require) {
     ],
 
     render: function () {
-      var self = this;
-      var id = this.getApp().getRouter().getParam("id");
-      if (id) {
-        this.model.set("id", id);
-        this.model.fetch({
-          success: function (data) {
-            self.applyBindings();
-          },
-          error: function () {
-            self.getApp().notify("Get data Eror");
-          },
-        });
-      } else {
-        self.applyBindings();
-      }
+      console.log("registerview rendered");
+      let self = this;
+      self.applyBindings();
+      // console.log("this", this);
+      // return this;
+      // var self = this;
+      // var id = this.getApp().getRouter().getParam("id");
+      // if (id) {
+      //   this.model.set("id", id);
+      //   this.model.fetch({
+      //     success: function (data) {
+      //       self.applyBindings();
+      //     },
+      //     error: function () {
+      //       self.getApp().notify("Get data Eror");
+      //     },
+      //   });
+      // } else {
+      //   self.applyBindings();
+      // }
     },
 
     validateEmail: function (email) {

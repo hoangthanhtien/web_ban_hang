@@ -1,57 +1,13 @@
 define(function (require) {
 	"use strict";
 	return [
-		// {
-		// 	"collectionName": "order", 
-		// 	"route": "order/collection(/:param)",
-		// 	"$ref": "app/view/Order/CollectionView",
-		// },
-		// {
-		// 	"collectionName": "order",
-		// 	"route": "order/model(/:param)",
-		// 	"$ref": "app/view/Order/ModelView",
-		// },	
-		// {
-		// 	"collectionName": "item", 
-		// 	"route": "item/collection(/:id)",
-		// 	"$ref": "app/view/item/CollectionView",
 
-		// },
-		// {
-		// 	"collectionName": "item",
-		// 	"route": "item/model(/:id)",
-		// 	"$ref": "app/view/item/ModelView",
-		// },
-
-		// {
-		// 	"collectionName": "item_category", 
-		// 	"route": "item_category/collection(/:id)",
-		// 	"$ref": "app/view/item_category/CollectionView",
-
-		// },
-		// {
-		// 	"collectionName": "item_category",
-		// 	"route": "item_category/model(/:id)",
-		// 	"$ref": "app/view/item_category/ModelView",
-		// },
-		// {
-		// 	"collectionName": "organization", 
-		// 	"route": "organization/collection(/:id)",
-		// 	"$ref": "app/view/organization/CollectionView",
-
-		// },
-		// {
-		// 	"collectionName": "organization",
-		// 	"route": "organization/model(/:id)",
-		// 	"$ref": "app/view/organization/ModelView",
-		// },
-		// {
-		// 	"collectionName": "organization_report", 
-		// 	"route": "organization_report/collection(/:id)",
-		// 	"$ref": "app/view/organization_report/CollectionView",
-
-		// },
-
+		////////////////////// REGISTER - Form đăng ký
+		{
+			"collectionName": "register", 
+			"route": "register",
+			"$ref": "app/bases/views/RegisterView",
+		},
 		////////////////////// ORGANIZATION
 		{
 			"collectionName": "organization", 

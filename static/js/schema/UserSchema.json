@@ -16,6 +16,10 @@
         "type": "number",
         "primary": true
     },
+    "phone": {
+        "type": "string",
+        "length": 11
+    },
     "user_name": {
         "type": "string",
         "required": true,

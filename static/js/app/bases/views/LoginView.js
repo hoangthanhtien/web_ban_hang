@@ -1,65 +1,75 @@
 define(function (require) {
+  "use strict";
+  var $ = require("jquery"),
+    _ = require("underscore"),
+    Gonrin = require("gonrin"),
+    tpl = require("text!app/bases/tpl/login.html"),
+    template = _.template(tpl);
+  return Gonrin.View.extend({
+    render: function () {
+      var self = this;
 
-    "use strict";
-    var $                   = require('jquery'),
-        _                   = require('underscore'),
-        Gonrin            	= require('gonrin'),
-        
-        tpl                 = require('text!app/bases/tpl/login.html'),
-        template = _.template(tpl);
-    return Gonrin.View.extend({
-        render: function () {
-        	var self = this;
-        	
-        	self.getApp().currentUser = null;
-            this.$el.html(template());
-            
-        	$("#forget-password").unbind('click').bind('click', function(){
-                self.getApp().getRouter().navigate("forgot");
-        	});
+      self.getApp().currentUser = null;
+      this.$el.html(template());
 
-            console.log("Login view render");
-            this.$el.find("#login-form").unbind("submit").bind("submit", function(){
-            	self.processLogin();
-            	return false;
-            });
-            return this;
+      $("#forget-password")
+        .unbind("click")
+        .bind("click", function () {
+          self.getApp().getRouter().navigate("forgot");
+        });
+
+      console.log("Nut dang ky", this.$el.find("#register-btn"));
+      this.$el.find("#register-btn").bind("click", ()=>{
+	     self.getApp().getRouter().navigate("register")
+      })
+      console.log("Login view render");
+      this.$el
+        .find("#login-form")
+        .unbind("submit")
+        .bind("submit", function () {
+          self.processLogin();
+          return false;
+        });
+      return this;
+    },
+    processLogin: function () {
+      var username = this.$("[name=username]").val().trim();
+      var password = this.$("[name=password]").val();
+      var organization_no = this.$("[name=organization_no]").val().trim();
+
+      var data = JSON.stringify({
+        data: username,
+        password: password,
+      });
+      var self = this;
+      $.ajax({
+        url: "/user/login",
+        type: "post",
+        data: data,
+        beforeSend: function () {
+          $("#loading").removeClass("hidden");
         },
-       	processLogin: function(){
-       		var username = this.$('[name=username]').val().trim();
-			var password = this.$('[name=password]').val();
-			var organization_no = this.$('[name=organization_no]').val().trim();
-			   
-       		var data = JSON.stringify({
-       		    data: username,
-				password: password,
-       		});
-       		var self = this;
-       		$.ajax({
-       		    url: '/user/login',
-       		    type: 'post',
-       		    data: data,
-	       		beforeSend: function(){
-	    		    $("#loading").removeClass("hidden");
-	    		   },
-	    		complete: function(){
-	 		    	$("#loading").addClass("hidden");
-	 		    },
-       		    dataType: 'json',
-       		    success: function (data) {
-       		    	self.getApp().postLogin(data);
-       		    },
-       		    error: function(request, textStatus, errorThrown) {
-       		    	//console.log(request);
-       		    	try {
-       		    		self.getApp().notify($.parseJSON(request.responseJSON).message);
-       		    	} catch(err) {
-       		    		self.getApp().notify({message: 'Có lỗi xảy ra, vui lòng thử lại sau'},{type: "danger"});
-       		    	}
-       		    }
-       		});
-       	},
-
-    });
-
+        complete: function () {
+          $("#loading").addClass("hidden");
+        },
+        dataType: "json",
+        success: function (data) {
+          self.getApp().postLogin(data);
+        },
+        error: function (request, textStatus, errorThrown) {
+          //console.log(request);
+          try {
+            self.getApp().notify($.parseJSON(request.responseJSON).message);
+          } catch (err) {
+            self
+              .getApp()
+              .notify(
+                { message: "Có lỗi xảy ra, vui lòng thử lại sau" },
+                { type: "danger" }
+              );
+          }
+        },
+      });
+    },
+  });
 });

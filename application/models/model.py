@@ -44,6 +44,7 @@ class User(CommonModel):
         full_name: Tên đầy đủ (example: Hoàng Thành Tiến)
         password: Mật khẩu
         salt: Mã salt tự gen để mã hóa khẩu
+        phone: Số điện thoại
         is_active: Trạng thái hoạt động của user
 
     """
@@ -52,6 +53,7 @@ class User(CommonModel):
     id = db.Column(Integer, autoincrement=True, primary_key=True)
 
     # Authentication Attributes.
+    phone = db.Column(String(11), index=True, unique=True)
     user_name = db.Column(String(255), nullable=False, index=True)
     full_name = db.Column(String(255), nullable=True)
     email = db.Column(String(255), nullable=False, index=True)
