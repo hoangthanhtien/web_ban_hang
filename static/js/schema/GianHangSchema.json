@@ -1,0 +1,42 @@
+{
+    "created_at": {
+        "type": "datetime"
+    },
+    "updated_at": {
+        "type": "datetime"
+    },
+    "deleted": {
+        "type": "boolean",
+        "default": false
+    },
+    "deleted_at": {
+        "type": "datetime"
+    },
+    "id": {
+        "type": "number",
+        "primary": true
+    },
+    "ma_gian_hang": {
+        "type": "string",
+        "length": 255
+    },
+    "ten_gian_hang": {
+        "type": "string",
+        "required": true,
+        "length": 255
+    },
+    "loai_gian_hang_id": {
+        "type": "number",
+        "required": true
+    },
+    "chu_gian_hang_id": {
+        "type": "number",
+        "required": true
+    },
+    "loai_gian_hang": {
+        "type": "dict"
+    },
+    "chu_gian_hang": {
+        "type": "dict"
+    }
+}
