@@ -148,11 +148,11 @@
   </div>
   <script>
     function logout() {
-      localStorage.removeItem("user_login");
-      var url = "/app/api/v1/logout";
+      localStorage.removeItem("user");
+      var url = "user/logout";
       $.ajax({
         url: url,
-        type: "POST",
+        type: "GET",
         contentType: "application/json; charset=utf-8",
         success: function () {
           localStorage.clear();

@@ -35,10 +35,10 @@ define(function (require) {
     processLogin: function () {
       var username = this.$("[name=username]").val().trim();
       var password = this.$("[name=password]").val();
-      var organization_no = this.$("[name=organization_no]").val().trim();
+      // var organization_no = this.$("[name=organization_no]").val().trim();
 
       var data = JSON.stringify({
-        data: username,
+        user_name: username,
         password: password,
       });
       var self = this;

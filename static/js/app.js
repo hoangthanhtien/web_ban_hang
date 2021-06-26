@@ -62,44 +62,34 @@ require([
     },
     getCurrentUser: function () {
       var self = this;
-      var token = localStorage.getItem("organization_token");
-      if (!!token) {
-        $.ajaxSetup({
-          headers: {
-            "content-type": "application/json",
-            "X-ORGANIZATION-USER-TOKEN": token,
+      var currenUser = localStorage.getItem("currentUser");
+      // var token = localStorage.getItem("organization_token");
+      // if (!!token) {
+      //   $.ajaxSetup({
+      //     headers: {
+      //       "content-type": "application/json",
+      //       "X-ORGANIZATION-USER-TOKEN": token,
+      //     },
+      //   });
+      // }
+      if (!currenUser) {
+        $.ajax({
+          url: self.serviceURL + "/user/current_user",
+          dataType: "json",
+          success: function (data) {
+            console.log("data current User", data);
+            self.postLogin(data);
+          },
+          error: function (XMLHttpRequest, textStatus, errorThrown) {
+            self.router.navigate("login");
           },
         });
       }
-      $.ajax({
-        url: self.serviceURL + "/organization/user/current_user",
-        dataType: "json",
-        success: function (data) {
-          console.log("data current User",data)
-          if (!("token" in data)) {
-            data["token"] = token;
-          }
-          self.postLogin(data);
-        },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-          self.router.navigate("login");
-        },
-      });
-
-      // // self.postLogin({
-      // // 	fullname: "Cuong"
-      // });
     },
 
     postLogin: function (data) {
       var self = this;
-      $.ajaxSetup({
-        headers: {
-          "content-type": "application/json",
-          "X-ORGANIZATION-USER-TOKEN": data.token,
-        },
-      });
-      localStorage.setItem("organization_token", data.token);
+      localStorage.setItem("user", JSON.stringify(data));
 
       $("#body-container").html(layout);
       self.currentUser = new Gonrin.User(data);

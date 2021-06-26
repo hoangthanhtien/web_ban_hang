@@ -11,40 +11,10 @@ define(function (require) {
 		// 	}
 		// },
 		{
-			"text":"Quản lý phòng ban",
+			"text":"Quản lý gian hàng",
 			// "icon":"fa fa-child",
 			"type":"view",
-			"route":"organization_user_group/collection"
-		},
-		{
-			"text":"Danh sách người dùng",
-			// "icon":"fa fa-child",
-			"type":"view",
-			"route":"organization_contact_relation/collection"
-		},
-		{
-			"text":"Quản lý đơn quà tặng",
-			// "icon":"fa fa-child",
-			"type":"view",
-			"route":"procurement_group/collection"
-		},
-		{
-			"text":"Quản lý đơn theo kỳ",
-			// "icon":"cil-calendar",
-			"type":"view",
-			"route":"procurement_group_by_time/collection"
-		},
-		{
-			"text":"Báo cáo tổng hợp",
-			// "icon":"cil-calendar",
-			"type":"view",
-			"route":"organization_report/collection"
-		},
-		{
-			"text":"Báo cáo mua trước trả sau",
-			// "icon":"cil-calendar",
-			"type":"view",
-			"route":"organization_debit_report/collection"
+			"route":"gianhang/collection"
 		},
 		{
 			"text":"Lịch sử đặt hàng",
