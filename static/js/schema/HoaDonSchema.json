@@ -1,16 +1,17 @@
 {
     "created_at": {
-        "type": "datetime"
+        "type": "",
+        "default": 1624766183
     },
     "updated_at": {
-        "type": "datetime"
+        "type": ""
     },
     "deleted": {
         "type": "boolean",
         "default": false
     },
     "deleted_at": {
-        "type": "datetime"
+        "type": ""
     },
     "id": {
         "type": "number",
@@ -33,10 +34,6 @@
     },
     "thanhtien": {
         "type": "number"
-    },
-    "vat": {
-        "type": "number",
-        "default": 10
     },
     "tongtien": {
         "type": "number"

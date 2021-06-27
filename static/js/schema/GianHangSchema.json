@@ -1,16 +1,17 @@
 {
     "created_at": {
-        "type": "datetime"
+        "type": "",
+        "default": 1624766183
     },
     "updated_at": {
-        "type": "datetime"
+        "type": ""
     },
     "deleted": {
         "type": "boolean",
         "default": false
     },
     "deleted_at": {
-        "type": "datetime"
+        "type": ""
     },
     "id": {
         "type": "number",
@@ -26,8 +27,7 @@
         "length": 255
     },
     "loai_gian_hang_id": {
-        "type": "number",
-        "required": true
+        "type": "number"
     },
     "chu_gian_hang_id": {
         "type": "number",

@@ -1,4 +1,11 @@
 import uuid
+import datetime
+import math
+
+def get_current_timestamp():
+    ts = datetime.datetime.now().timestamp()
+    result = math.floor(ts)
+    return result
 
 #from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import (
@@ -6,6 +13,7 @@ from sqlalchemy import (
     DateTime, Date, Boolean,
     event, func
 )
+from sqlalchemy.sql.sqltypes import BIGINT, BigInteger
 
 from application.database import db
 
@@ -46,10 +54,10 @@ def adjacency_model_ondelete_listener(mapper, connection, instance):
 class CommonModel(db.Model):
     __abstract__ = True
     id = db.Column(Integer, primary_key=True, default=default_uuid)
-    created_at = db.Column(DateTime)
-    updated_at = db.Column(DateTime)
+    created_at = db.Column(BigInteger, default=get_current_timestamp())
+    updated_at = db.Column(BigInteger)
     deleted = db.Column(Boolean, default=False)
-    deleted_at = db.Column(DateTime)
+    deleted_at = db.Column(BigInteger)
     
 
 event.listen(CommonModel, 'before_insert', model_oncreate_listener, propagate=True)

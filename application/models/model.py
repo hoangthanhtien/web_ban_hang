@@ -119,7 +119,7 @@ class GianHang(CommonModel):
     id = db.Column(Integer, primary_key=True)
     ma_gian_hang = db.Column(String(255), unique=True)
     ten_gian_hang = db.Column(String(255), nullable=False)
-    loai_gian_hang_id = db.Column(Integer, ForeignKey('loaigianhang.id'), nullable=False)
+    loai_gian_hang_id = db.Column(Integer, ForeignKey('loaigianhang.id'), nullable=True)
     loai_gian_hang = db.relationship("LoaiGianHang", foreign_keys=[loai_gian_hang_id])
     chu_gian_hang_id = db.Column(Integer, ForeignKey('users.id'), nullable=False)
     chu_gian_hang = db.relationship("User", foreign_keys=[chu_gian_hang_id])
@@ -133,15 +133,21 @@ class HangHoa(CommonModel):
         gia: Giá hàng hóa
         ghichu: Ghi chú cho hàng hóa
         gianhang_uid: Khóa ngoại tới gian hàng (Chỉ ra sản phẩm này thuộc gian hàng nào)
+        trang_thai: 0-deactive, 1-active
+        vat: Thuế giá trị gia tăng, default = 10, nếu = 10 thì tức là vat = 10 %
+        image_url: link ảnh sản phẩm
     """
     __tablename__ = 'hanghoa'
     id = db.Column(Integer, primary_key=True)
     ma = db.Column(String(255), unique=True)
     ten = db.Column(String(255), nullable=False)
     gia = db.Column(Integer)
+    vat = db.Column(Integer, default=10)
     ghichu = db.Column(String(255))
     gianhang_uid = db.Column(Integer, ForeignKey('gianhang.id'),nullable=False)
     gianhang = db.relationship("GianHang")
+    trang_thai = db.Column(Integer,default=1)
+    image_url = db.Column(String(255))
 
 class HoaDon(CommonModel):
     """Hóa đơn
@@ -152,7 +158,6 @@ class HoaDon(CommonModel):
         khachhang_id: Khóa ngoại liên kết tới người mua (Đang để liên kết tới bảng users, không phải bảng khach_hang) 
         ngaymua: Ngày mua
         thanhtien: Thành tiền, sau khi đã tính thuế, hoặc chiết khấu (nếu có)
-        vat: Thuế giá trị gia tăng, default = 10, nếu = 10 thì tức là vat = 10 %
         tongtien: Tổng tiền trong hóa đơn chưa trừ thuế
         chitiethoadon: relationship đến các mặt hàng trong hóa đơn
     """
@@ -166,7 +171,6 @@ class HoaDon(CommonModel):
     ngaymua = db.Column(DateTime)
 
     thanhtien = db.Column(DECIMAL)
-    vat = db.Column(Integer, default=10)
     tongtien = db.Column(DECIMAL)
 
     chitiethoadon = db.relationship("ChiTietHoaDon", order_by="ChiTietHoaDon.id", cascade="all, delete-orphan", lazy='dynamic')
