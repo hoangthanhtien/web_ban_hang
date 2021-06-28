@@ -54,10 +54,10 @@ def adjacency_model_ondelete_listener(mapper, connection, instance):
 class CommonModel(db.Model):
     __abstract__ = True
     id = db.Column(Integer, primary_key=True, default=default_uuid)
-    created_at = db.Column(BigInteger, default=get_current_timestamp())
-    updated_at = db.Column(BigInteger)
+    created_at = db.Column(DateTime)
+    updated_at = db.Column(DateTime)
     deleted = db.Column(Boolean, default=False)
-    deleted_at = db.Column(BigInteger)
+    deleted_at = db.Column(DateTime)
     
 
 event.listen(CommonModel, 'before_insert', model_oncreate_listener, propagate=True)
