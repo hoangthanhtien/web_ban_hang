@@ -1,17 +1,16 @@
 {
     "created_at": {
-        "type": "",
-        "default": 1624766183
+        "type": "datetime"
     },
     "updated_at": {
-        "type": ""
+        "type": "datetime"
     },
     "deleted": {
         "type": "boolean",
         "default": false
     },
     "deleted_at": {
-        "type": ""
+        "type": "datetime"
     },
     "id": {
         "type": "number",
