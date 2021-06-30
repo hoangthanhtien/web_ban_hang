@@ -7,6 +7,13 @@ define(function (require) {
     
     var routedata = require('app/bases/nav/route');
     var LoginView = require('app/bases/views/LoginView');
+    var AboutView = require('app/bases/views/AboutView'),
+        BlogView = require('app/bases/views/BlogView'),
+        BlogDetailsView = require('app/bases/views/BlogDetailsView'),
+        ElementsView = require('app/bases/views/ElementsView'),
+        ConfirmationView = require('app/bases/views/ConfirmationView'),
+        CheckoutView = require('app/bases/views/CheckoutView'),
+        ContactView = require('app/bases/views/ContactView');
     // var QuocgiaCollectionView = require('app/view/QuocGia/CollectionView');
     
     return Gonrin.Router.extend({
@@ -17,21 +24,53 @@ define(function (require) {
             "forgot":"forgotPassword",
             "dangky":"dangky",
             "error":"error_page",
-            // "quocgia/collection": "quocgia_collection",
-            // "*path":  "defaultRoute"
+            "about": "about",
+            "blog": "blog",
+            "elements":"elements",
+            "confirmation":"confirmation",
+            "blog_details": "blog_details",
+            "checkout": "checkout",
+            "contact": "contact",
+            "*path":  "defaultRoute"
         },
         defaultRoute:function(){
             console.log("defaultRoute");
-        	//this.navigate("index",true);
+            this.navigate("index",true);
+            // var aboutview = new AboutView({ el: $('#body-container') });
+            // aboutview.render();
         },
         index:function(){
+            var loginview = new LoginView({ el: $('#body-container') });
+            loginview.render();
         },
-        // quocgia_collection: function(){
-        //     var self = this;
-        //     console.log("quocgia collection");
-        //     var view = new QuocgiaCollectionView({el: self.getApp().$content});
-        //     view.render();
-        // },
+        about: function(){
+            var aboutview = new AboutView({ el: $('#body-container') });
+            aboutview.render();
+        },
+        blog: function(){
+            var blogview = new BlogView({ el: $('#body-container') });
+            blogview.render();
+        },
+        blog_details: function(){
+            var blog_detailsview = new BlogDetailsView({ el: $('#body-container') });
+            blog_detailsview.render();
+        },
+        elements: function(){
+            var elementsview = new ElementsView({ el: $('#body-container') });
+            elementsview.render();
+        },
+        confirmation: function(){
+            var confirmationview = new ConfirmationView({ el: $('#body-container') });
+            confirmationview.render();
+        },
+        checkout: function(){
+            var checkoutview = new CheckoutView({ el: $('#body-container') });
+            checkoutview.render();
+        },
+        contact: function(){
+            var contactview = new ContactView({ el: $('#body-container') });
+            contactview.render();
+        },
         login: function () {
             console.log("Chay login function tai router.js");
             var loginview = new LoginView({ el: $('#body-container') });

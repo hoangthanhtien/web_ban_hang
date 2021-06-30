@@ -81,7 +81,7 @@ define("jquery", [], function () {
               self.postLogin(data);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
-              self.router.navigate("login");
+              self.router.navigate("index");
             },
           });
         }
