@@ -1,5 +1,6 @@
 static/js/lib
 static/vendor/GonrinUI
+static/vendor/GonrinUIBoostrap4
 nohup.out
 alembic/**/__pycache__
 alembic/versions
@@ -11,4 +12,4 @@ application/**/__pycache__
 dump.rdb
 /**/*.DS_Store
 static/upload
-static/vendor
+# static/vendor
