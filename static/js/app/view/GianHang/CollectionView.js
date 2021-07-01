@@ -7,11 +7,12 @@ define(function (require) {
 
   var template = require("text!app/view/GianHang/tpl/collection.html");
   var schema = require("json!schema/GianHangSchema.json");
-//   Tạo view
+  var itemView = require("text!app/view/HangHoa/ItemView.js");
+  //   Tạo view
   return Gonrin.CollectionView.extend({
     template: template, // Template jinja (HTML)
     modelSchema: schema, // model của view
-    urlPrefix: "/api/v1/", 
+    urlPrefix: "/api/v1/",
     collectionName: "gianhang",
     tools: [
       {
@@ -63,6 +64,24 @@ define(function (require) {
         },
         { field: "ma_gian_hang", label: "Mã gian hàng" },
         { field: "ten_gian_hang", label: "Tên gian hàng", width: 250 },
+        {
+          field: "items",
+          uicontrol: false,
+          itemView: itemView,
+          tools: [
+            {
+              name: "create",
+              type: "button",
+              buttonClass: "btn btn-primary btn-sm",
+              label: "Thêm hàng hóa",
+              command: "create",
+              visible: function () {
+                return true;
+              },
+            },
+          ],
+          toolEl: "#add_row1",
+        }
         // { field: "", label: "Giá" },
       ],
       onRowClick: function (event) {
@@ -74,12 +93,11 @@ define(function (require) {
     },
     render: function () {
       let self = this;
-      let createButton = this.$el.find("[name=create]")
-      console.log("createButton", createButton)
-      console.log("Đã vào collection view gianhang")
+      let createButton = this.$el.find("[name=create]");
+      console.log("createButton", createButton);
+      console.log("Đã vào collection view gianhang");
       this.applyBindings();
       return this;
     },
   });
 });
-

@@ -6,6 +6,7 @@ define(function (require) {
 
   var template = require("text!app/view/GianHang/tpl/model.html"),
     schema = require("json!schema/GianHangSchema.json");
+  var itemView = require("text!app/view/HangHoa/ItemView.js");
 
   return Gonrin.ModelView.extend({
     template: template,
@@ -36,18 +37,16 @@ define(function (require) {
             label: "Lưu gian hàng",
             command: function () {
               var self = this;
-              console.log("Thông tin model gian hàng", self.model)
+              console.log("Thông tin model gian hàng", self.model);
               var currentUserInfo = self.getApp().currentUser;
-              self.model.set("chu_gian_hang_id",currentUserInfo.id)
-              console.log("currentUserInfo",currentUserInfo)
+              self.model.set("chu_gian_hang_id", currentUserInfo.id);
+              console.log("currentUserInfo", currentUserInfo);
               self.model.save(null, {
                 success: function (model, respose, options) {
-                  self
-                    .getApp()
-                    .notify({
-                      message: "Lưu thông tin thành công",
-                      type: "success",
-                    });
+                  self.getApp().notify({
+                    message: "Lưu thông tin thành công",
+                    type: "success",
+                  });
                   self
                     .getApp()
                     .getRouter()
@@ -60,17 +59,17 @@ define(function (require) {
             },
           },
           {
-            name:"addItem",
-            type:"button",
-            buttonClass:"btn-success btn-lg",
-            label:"Thêm mới hàng hóa",
-            command:function(){
+            name: "addItem",
+            type: "button",
+            buttonClass: "btn-success btn-lg",
+            label: "Thêm mới hàng hóa",
+            command: function () {
               let self = this;
-              console.log("self",self)
-              let url = "hanghoa/model"
-              console.log("url",url)
-              self.getApp().getRouter().navigate(url)
-            }
+              console.log("self", self);
+              let url = "hanghoa/model";
+              console.log("url", url);
+              self.getApp().getRouter().navigate(url);
+            },
           },
           {
             name: "delete",
@@ -82,36 +81,32 @@ define(function (require) {
               let currentUserInfo = self.getApp().currentUser;
               let currentUserID = currentUserInfo.id;
               let id = self.getApp().getParameterUrl("id"); //Lấy thông tin param 'id'
-              if(id == null){
+              if (id == null) {
                 return false;
               }
-              if(currentUserID == null){
+              if (currentUserID == null) {
                 return false;
               }
-              return true
+              return true;
             },
             command: function () {
               var self = this;
               self.model.destroy({
                 success: function (model, response) {
-                  self
-                    .getApp()
-                    .notify({
-                      message: "Xoá dữ liệu thành công",
-                      type: "success",
-                    });
+                  self.getApp().notify({
+                    message: "Xoá dữ liệu thành công",
+                    type: "success",
+                  });
                   self
                     .getApp()
                     .getRouter()
                     .navigate(self.collectionName + "/collection");
                 },
                 error: function (model, xhr, options) {
-                  self
-                    .getApp()
-                    .notify({
-                      message: "Xoá dữ liệu không thành công",
-                      type: "danger",
-                    });
+                  self.getApp().notify({
+                    message: "Xoá dữ liệu không thành công",
+                    type: "danger",
+                  });
                 },
               });
             },
@@ -119,11 +114,31 @@ define(function (require) {
         ],
       },
     ],
+    uiControl: {
+      fields: [
+        {
+          field: "items",
+          uicontrol: false,
+          itemView: itemView,
+          tools: [
+            {
+              name: "create",
+              type: "button",
+              buttonClass: "btn btn-primary btn-sm",
+              label: "Thêm hàng hóa",
+              command: "create",
+              visible: function () {
+                return true;
+              },
+            },
+          ],
+          toolEl: "#add_row1",
+        },
+      ],
+    },
     render: function () {
-      console.log("Đã vào phần quản lý gian hàng model");
       var self = this;
       let id = self.getApp().getParameterUrl("id"); //Lấy thông tin param 'id'
-      console.log("id trong render func modelview",id)
       if (id) {
         this.model.set("id", id);
         this.model.fetch({
