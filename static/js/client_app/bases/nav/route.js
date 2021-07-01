@@ -13,10 +13,24 @@ define(function (require) {
 		// 	"$ref": "app/view/GianHang/ModelView",
 		// },
 		
+		// {
+		// 	"collectionName": "about", 
+		// 	"route": "about/collection",
+		// 	"$ref": "app/view/about/CollectionView",
+		// },
+
+
+		/////////////
+		////////////////////// Hàng Hóa 
 		{
-			"collectionName": "about", 
-			"route": "about/collection",
-			"$ref": "app/view/about/CollectionView",
+			"collectionName": "hanghoa", 
+			"route": "hanghoa/collection(/:id)",
+			"$ref": "app/view/HangHoa/CollectionView",
+		},
+		{
+			"collectionName": "hanghoa",
+			"route": "hanghoa/model(/:id)",
+			"$ref": "app/view/HangHoa/ModelView",
 		},
 	];
 

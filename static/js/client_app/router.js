@@ -13,7 +13,8 @@ define(function (require) {
         ElementsView = require('app/bases/views/ElementsView'),
         ConfirmationView = require('app/bases/views/ConfirmationView'),
         CheckoutView = require('app/bases/views/CheckoutView'),
-        ContactView = require('app/bases/views/ContactView');
+        ContactView = require('app/bases/views/ContactView'),
+        ClientLoginView = require('app/bases/views/ClientLoginView');
     // var QuocgiaCollectionView = require('app/view/QuocGia/CollectionView');
     
     return Gonrin.Router.extend({
@@ -31,6 +32,7 @@ define(function (require) {
             "blog_details": "blog_details",
             "checkout": "checkout",
             "contact": "contact",
+            "client_login": "client_login",
             "*path":  "defaultRoute"
         },
         defaultRoute:function(){
@@ -70,6 +72,10 @@ define(function (require) {
         contact: function(){
             var contactview = new ContactView({ el: $('#body-container') });
             contactview.render();
+        },
+        client_login: function () {
+            var loginview = new ClientLoginView({ el: $('#body-container') });
+            loginview.render();
         },
         login: function () {
             console.log("Chay login function tai router.js");
