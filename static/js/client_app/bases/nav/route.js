@@ -22,16 +22,16 @@ define(function (require) {
 
 		/////////////
 		////////////////////// Hàng Hóa 
-		{
-			"collectionName": "hanghoa", 
-			"route": "hanghoa/collection(/:id)",
-			"$ref": "app/view/HangHoa/CollectionView",
-		},
-		{
-			"collectionName": "hanghoa",
-			"route": "hanghoa/model(/:id)",
-			"$ref": "app/view/HangHoa/ModelView",
-		},
+		// {
+		// 	"collectionName": "hanghoa", 
+		// 	"route": "hanghoa/collection(/:id)",
+		// 	"$ref": "app/view/HangHoa/CollectionView",
+		// },
+		// {
+		// 	"collectionName": "hanghoa",
+		// 	"route": "hanghoa/model(/:id)",
+		// 	"$ref": "app/view/HangHoa/ModelView",
+		// },
 	];
 
 });
