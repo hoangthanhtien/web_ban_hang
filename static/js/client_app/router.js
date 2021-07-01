@@ -14,7 +14,8 @@ define(function (require) {
         ConfirmationView = require('app/bases/views/ConfirmationView'),
         CheckoutView = require('app/bases/views/CheckoutView'),
         ContactView = require('app/bases/views/ContactView'),
-        ClientLoginView = require('app/bases/views/ClientLoginView');
+        ClientLoginView = require('app/bases/views/ClientLoginView'),
+        ShopView = require('app/bases/views/ShopView');
     // var QuocgiaCollectionView = require('app/view/QuocGia/CollectionView');
     
     return Gonrin.Router.extend({
@@ -32,6 +33,7 @@ define(function (require) {
             "blog_details": "blog_details",
             "checkout": "checkout",
             "contact": "contact",
+            "shop": "shop",
             "client_login": "client_login",
             "*path":  "defaultRoute"
         },
@@ -72,6 +74,10 @@ define(function (require) {
         contact: function(){
             var contactview = new ContactView({ el: $('#body-container') });
             contactview.render();
+        },
+        shop: function(){
+            var shopview = new ShopView({ el: $('#body-container') });
+            shopview.render();
         },
         client_login: function () {
             var loginview = new ClientLoginView({ el: $('#body-container') });
