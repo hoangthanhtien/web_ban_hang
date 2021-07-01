@@ -1,3 +1,5 @@
+from random import random
+import string
 from gatco.response import json, text
 from application.server import app
 from application.database import db
@@ -43,3 +45,32 @@ async def user_current_user(request):
     else:
         return json({"error_code": "NOT_FOUND", "error_message": "User not found"}, status=520)
     return json({"error_code": "UNKNOWN", "error_message": "Unknown error"}, status=520)
+
+@app.route("/user/register", methods=["POST"])
+async def user_register(request):
+    data = request.json
+    user_name = data.get("user_name",None)
+    password = data.get('password',None)
+    full_name = data.get("full_name",None)
+    email = data.get("email",None)
+
+    if user_name is None or password is None:
+        return json({"error_code": "DATA ERROR", "error_message": "DATA ERROR"}, status=520)
+    user = User.query.filter(User.user_name == user_name).first()
+    if user is None:
+        # create salt
+        letters = string.ascii_lowercase
+        user_salt = ''.join(random.choice(letters) for i in range(64))
+        print("user_salt", user_salt)
+        # create user password
+        user_password=auth.encrypt_password(password, user_salt)
+
+        #create user
+        user = User(user_name=user_name, full_name=full_name, email=email,\
+            password=user_password, salt=user_salt)
+        
+        db.session.add(user)
+ 
+    db.session.commit()
+    return json({},200)
+
