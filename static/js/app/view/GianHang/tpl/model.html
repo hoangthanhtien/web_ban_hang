@@ -46,4 +46,47 @@
     </div>
     <div id="grid" class="row list-user"></div>
   </div>
+  <div class="card-body row">
+    <div class="col-12 out-click">
+      <div class="box-header with-border px-0">
+        <h3>Danh sách hàng hóa</h3>
+        <div class="box-tools">
+          <div
+            block-bind="btn-inline"
+            style="position: relative; display: inline-flex"
+          >
+            <div id="add_row1"></div>
+            <!-- <button type="button" class="btn btn-warning btn-sm">
+              Xoá bộ lọc
+            </button> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-around align-items-center w-100">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col" class="text-center" style="width: 30%">
+                Họ và Tên
+              </th>
+              <th scope="col" class="text-center" style="width: 20%">
+                Số Điện Thoại
+              </th>
+              <th scope="col" class="text-center" style="width: 8%">
+                Giới Tính
+              </th>
+              <th scope="col" class="text-center" style="width: 10%">Hạng</th>
+              <th scope="col" class="text-center" style="width: 30%">
+                Phòng ban
+              </th>
+              <th scope="col" style="width: 2%"></th>
+            </tr>
+          </thead>
+
+          <tbody id="item-data" data-bind="list:items"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </section>
