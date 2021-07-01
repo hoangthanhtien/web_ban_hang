@@ -10,9 +10,26 @@ define(function (require) {
     return Gonrin.View.extend({
         render: function () {
         	var self = this;
-        	
+            
+            var url = self.getApp().serviceURL+'/api/v1/hanghoa';
+            console.log("SHOP now", url)
+            $.ajax({
+                url:  url,
+                dataType: 'json',
+                success: function (data) {
+                    console.log("DATA",data);
+                    
+                },
+                error: function(request, textStatus, errorThrown) {
+                    console.log("ERROR SML")
+                    self.getApp().notify({message: 'Có lỗi xảy ra, vui lòng thử lại sau'},{type: "danger"});
+                    
+                }
+            });
             this.$el.html(template());
             
+            var item = "<p>Test</p>";
+            $( "#item-gallery" ).append( item );
         	// $("#forget-password").unbind('click').bind('click', function(){
             //     self.getApp().getRouter().navigate("forgot");
         	// });
