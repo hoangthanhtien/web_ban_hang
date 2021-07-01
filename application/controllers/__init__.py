@@ -14,5 +14,8 @@ def init_views(app):
     def index(request):
         #return text("Index")
         return jinja.render('index.html', request)
+    @app.route('/client_app/')
+    def admin_index(request):
+        return jinja.render('index_client.html', request)
     
     
