@@ -19,10 +19,9 @@ define(function (require) {
         });
 
       console.log("Nut dang ky", this.$el.find("#register-btn"));
-      this.$el.find("#register-btn").bind("click", ()=>{
+      this.$el.find("#register-btn").bind("click", function(){
 	     self.getApp().getRouter().navigate("register")
       })
-      console.log("Login view render");
       this.$el
         .find("#login-form")
         .unbind("submit")

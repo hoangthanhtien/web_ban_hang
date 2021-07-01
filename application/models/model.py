@@ -198,3 +198,17 @@ class ChiTietHoaDon(CommonModel):
 class GioHang(CommonModel):
     __table_name__ = 'giohang'
     id = db.Column(Integer, primary_key=True)
+    khach_hang_id = db.Column(Integer, ForeignKey("users.id"), nullable=False)
+    khach_hang = db.relationship("User")
+    tongtien = db.Column(Integer)
+    chitietgiohang = db.relationship("ChiTietGioHang")
+
+class ChiTietGioHang(CommonModel):
+    __table_name__ = "chitietgiohang"
+    hanghoa_id = db.Column(Integer, ForeignKey('hanghoa.id'), nullable=False)
+    hanghoa = db.relationship("HangHoa")
+    soluong = db.Column(DECIMAL(), nullable=False)
+    dongia = db.Column(Integer)
+    thanhtien = db.Column(Integer)
+    giohang_id = db.Column(Integer, ForeignKey('giohang.id'), nullable=False)
+    giohang = db.relationship("GioHang")
