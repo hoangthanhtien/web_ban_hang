@@ -15,5 +15,18 @@
     "id": {
         "type": "number",
         "primary": true
+    },
+    "khach_hang_id": {
+        "type": "number",
+        "required": true
+    },
+    "tongtien": {
+        "type": "number"
+    },
+    "khach_hang": {
+        "type": "dict"
+    },
+    "chitietgiohang": {
+        "type": "list"
     }
 }

@@ -28,6 +28,10 @@
         "type": "number",
         "required": true
     },
+    "trangthai": {
+        "type": "number",
+        "default": 3
+    },
     "ngaymua": {
         "type": "datetime"
     },
