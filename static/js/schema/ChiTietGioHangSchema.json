@@ -1,0 +1,43 @@
+{
+    "created_at": {
+        "type": "datetime"
+    },
+    "updated_at": {
+        "type": "datetime"
+    },
+    "deleted": {
+        "type": "boolean",
+        "default": false
+    },
+    "deleted_at": {
+        "type": "datetime"
+    },
+    "id": {
+        "type": "number",
+        "primary": true
+    },
+    "hanghoa_id": {
+        "type": "number",
+        "required": true
+    },
+    "soluong": {
+        "type": "number",
+        "required": true
+    },
+    "dongia": {
+        "type": "number"
+    },
+    "thanhtien": {
+        "type": "number"
+    },
+    "giohang_id": {
+        "type": "number",
+        "required": true
+    },
+    "hanghoa": {
+        "type": "dict"
+    },
+    "giohang": {
+        "type": "dict"
+    }
+}

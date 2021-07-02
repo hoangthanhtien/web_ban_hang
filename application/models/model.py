@@ -167,7 +167,7 @@ class HoaDon(CommonModel):
     ma = db.Column(String(255), unique=True)
     ghichu = db.Column(String(255))
     khachhang_id = db.Column(Integer, ForeignKey('users.id'), nullable=False)
-    trangthai = db.Column(String,default = "Chờ xử lý")
+    trangthai = db.Column(String(30),default = "Chờ xử lý")
     # tenkhachhang = db.Column(String(255))
     khach_hang = db.relationship("User")
     ngaymua = db.Column(DateTime)

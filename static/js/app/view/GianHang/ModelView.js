@@ -37,10 +37,8 @@ define(function (require) {
             label: "Lưu gian hàng",
             command: function () {
               var self = this;
-              console.log("Thông tin model gian hàng", self.model);
               var currentUserInfo = self.getApp().currentUser;
               self.model.set("chu_gian_hang_id", currentUserInfo.id);
-              console.log("currentUserInfo", currentUserInfo);
               self.model.save(null, {
                 success: function (model, respose, options) {
                   self.getApp().notify({

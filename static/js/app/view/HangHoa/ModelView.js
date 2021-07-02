@@ -35,23 +35,77 @@ define(function (require) {
             type: "button",
             buttonClass: "btn-success btn-lg",
             label: "Lưu",
+
             command: function () {
               var self = this;
               var currentUserInfo = self.getApp().currentUser;
               var id_gian_hang = self.model.get("gianhang_uid");
-              self.model.save(null, {
-                success: function (model, respose, options) {
+              var url = self.getApp().serviceURL + self.urlPrefix + self.collectionName 
+              $.ajax({
+                url: url,
+                data: JSON.stringify(self.model.toJSON()),
+                method: "POST",
+                contentType: "application/json",
+                success: function (data) {
+                  self
+                    .getApp()
+                    .getRouter()
+                    .navigate("gianhang" + "/collection");
+                  self.getApp().notify({message:"Lưu thông tin thành công!",type:"success"});
+                },
+                error: function (xhr, status, error) {
+                  self.getApp().notify({message:"Lưu thông tin không thành công!", type:"danger"});
+                },
+              });
+              // self.model.save(null, {
+              //   post:true,
+              //   success: function (model, respose, options) {
+              //     self.getApp().notify({
+              //       message: "Lưu thông tin thành công",
+              //       type: "success",
+              //     });
+              //     self
+              //       .getApp()
+              //       .getRouter()
+              //       .navigate("gianhang/model?id=" + id_gian_hang);
+              //   },
+              //   error: function (model, xhr, options) {
+              //     self.getApp().notify({message:"Lưu thông tin không thành công!", type:"danger"});
+              //   },
+              // });
+            },
+          },
+          {
+            name: "update",
+            type: "button",
+            buttonClass: "btn-primary btn-lg",
+            label: "Update thông tin",
+            visible: function () {
+              let self = this;
+              let id = self.getApp().getParameterUrl("id"); //Lấy thông tin param 'id'
+              if (id == null) {
+                return false;
+              }
+              return true;
+            },
+            command: function () {
+              var self = this;
+              self.model.destroy({
+                success: function (model, response) {
                   self.getApp().notify({
-                    message: "Lưu thông tin thành công",
+                    message: "Xoá dữ liệu thành công",
                     type: "success",
                   });
                   self
                     .getApp()
                     .getRouter()
-                    .navigate("gianhang/model?id=" + id_gian_hang);
+                    .navigate(self.collectionName + "/collection");
                 },
                 error: function (model, xhr, options) {
-                  self.getApp().notify("Lưu thông tin không thành công!");
+                  self.getApp().notify({
+                    message: "Xoá dữ liệu không thành công",
+                    type: "danger",
+                  });
                 },
               });
             },
