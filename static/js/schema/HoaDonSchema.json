@@ -29,8 +29,9 @@
         "required": true
     },
     "trangthai": {
-        "type": "number",
-        "default": 3
+        "type": "string",
+        "length": 30,
+        "default": "Ch\u1edd x\u1eed l\u00fd"
     },
     "ngaymua": {
         "type": "datetime"

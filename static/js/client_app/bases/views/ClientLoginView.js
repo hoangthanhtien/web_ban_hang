@@ -57,7 +57,7 @@ define(function (require) {
        		    	console.log(data);
        		    	// $.LoadingOverlay("hide");
 					self.getApp().postLogin(data);
-					// localStorage.setItem("email", data['data']['email']);
+					localStorage.setItem("user_cart_id", data['user_cart_id']);
 					// localStorage.setItem("fullname", data['data']['fullname']);
        		    	// if(password === undefined || password===""){
        		    	// 	self.router.navigate("user/profile");

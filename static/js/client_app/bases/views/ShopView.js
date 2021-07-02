@@ -42,14 +42,46 @@ define(function (require) {
         },
        	addComponent: function(data){
             let self = this;
+            var user_cart_id = localStorage.getItem('user_cart_id');
             $.each(data, function(idx, obj){
-                var item = '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">' + '<div class="single-popular-items mb-50 text-center">' + '<div class="popular-img">' + '<img src="' + obj['image_url'] + '" alt=""><div class="img-cap"><span>Add to cart</span></div><div class="favorit-items"><span class="flaticon-heart"></span></div></div><div class="popular-caption"><h3><a href="product_details.html">'+ obj['ten'] +'</a></h3><span>$ '+ obj['gia'] +'</span></div></div></div>';	
+                var item = '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">' + '<div class="single-popular-items mb-50 text-center">' + '<div class="popular-img">' + '<img src="' + obj['image_url'] + '" alt=""><div class="img-cap"><span id="add_to_cart">Add to cart<p style="display: none;">'+ obj['id'] +'</p><p style="display: none;">'+ obj['gia'] +'</p></span></div><div class="favorit-items"><span class="flaticon-heart"></span></div></div><div class="popular-caption"><h3><a href="#">'+ obj['ten'] +'</a></h3><span>$ '+ obj['gia'] +'</span></div></div></div>';	
                 $( "#item-gallery" ).append( item );
+                $("#add_to_cart").unbind('click').bind('click', function(){
+                    var item_id = $(this).find("p").eq(0).html(),
+                        price = $(this).find("p").eq(1).html();
+                    console.log("PRICCE",price)
+                    self.addToCart(item_id,price);
+                });
             })
 			
             
        	},
-
+        addToCart: function(item_id,price){
+            let self = this;
+            var user_cart_id = localStorage.getItem('user_cart_id');
+            var data_payload = {
+                'hanghoa_id': item_id,
+                'soluong': 1,
+                'dongia': price,
+                'thanhtien': price,
+                'giohang_id': user_cart_id
+            };
+            $.ajax({
+                url: self.getApp().serviceURL + "/api/v1/chitietgiohang",
+                type: 'post',
+                data: JSON.stringify(data_payload),
+                dataType: "json",
+                success: function(data){
+                    console.log("DATA", data)
+                    
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    // self.getApp().notify({ message: "Get receipt error!" }, { type: "danger" });
+                    self.$el.find("#no_res_grid").show();
+                    loader.hide();
+                }
+            });
+        }
     });
 
 });

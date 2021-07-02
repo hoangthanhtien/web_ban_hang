@@ -9,6 +9,7 @@ def init_views(app):
     import application.controllers.chitiethoadon
     import application.controllers.gianhang
     import application.controllers.loaigianhang
+    import application.controllers.giohang
     
     @app.route('/')
     def index(request):
