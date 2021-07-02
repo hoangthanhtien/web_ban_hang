@@ -25,3 +25,5 @@ uvloop
 websockets
 passlib
 psycopg2-binary
+shortuuid
+hashids
