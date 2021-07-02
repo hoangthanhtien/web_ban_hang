@@ -27,7 +27,7 @@ define(function (require) {
 		{
 			"collectionName": "register", 
 			"route": "register",
-			"$ref": "app/bases/views/RegisterView",
+			"$ref": "app/bases/views/RegisterView2",
 		},
 		////////////////////// ORGANIZATION
 		{

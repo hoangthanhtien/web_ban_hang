@@ -95,7 +95,7 @@ define(function (require) {
     ],
 
     render: function () {
-      console.log("registerview rendered");
+      console.log("registerview rendered in registerview");
       let self = this;
       self.applyBindings();
       // console.log("this", this);
