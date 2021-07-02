@@ -195,16 +195,10 @@ class ChiTietHoaDon(CommonModel):
     dongia = db.Column(Integer)
     thanhtien = db.Column(Integer)
     
-class GioHang(CommonModel):
-    __table_name__ = 'giohang'
-    id = db.Column(Integer, primary_key=True)
-    khach_hang_id = db.Column(Integer, ForeignKey("users.id"), nullable=False)
-    khach_hang = db.relationship("User")
-    tongtien = db.Column(Integer)
-    chitietgiohang = db.relationship("ChiTietGioHang")
 
 class ChiTietGioHang(CommonModel):
-    __table_name__ = "chitietgiohang"
+    __tablename__ = "chitietgiohang"
+    id = db.Column(Integer, primary_key=True)
     hanghoa_id = db.Column(Integer, ForeignKey('hanghoa.id'), nullable=False)
     hanghoa = db.relationship("HangHoa")
     soluong = db.Column(DECIMAL(), nullable=False)
@@ -212,3 +206,11 @@ class ChiTietGioHang(CommonModel):
     thanhtien = db.Column(Integer)
     giohang_id = db.Column(Integer, ForeignKey('giohang.id'), nullable=False)
     giohang = db.relationship("GioHang")
+
+class GioHang(CommonModel):
+    __tablename__ = 'giohang'
+    id = db.Column(Integer, primary_key=True)
+    khach_hang_id = db.Column(Integer, ForeignKey("users.id"), nullable=False)
+    khach_hang = db.relationship("User")
+    tongtien = db.Column(Integer)
+    chitietgiohang = db.relationship("ChiTietGioHang", order_by="ChiTietGioHang.id", cascade="all, delete-orphan", lazy='dynamic')
