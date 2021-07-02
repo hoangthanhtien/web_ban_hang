@@ -38,7 +38,7 @@ define(function (require) {
       ],
       onRowClick: function (event) {
         if (event.rowId) {
-          var path = this.collectionName + "/model?id=" + event.rowId;
+          var path = "chitiethoadon" + "/collection?id=" + event.rowId;
           this.getApp().getRouter().navigate(path);
         }
       },

@@ -35,6 +35,11 @@ define(function (require) {
 			"route": "hoadon/collection(/:id)",
 			"$ref": "app/view/HoaDon/CollectionView",
 		},
+		{
+			"collectionName": "hoadon", 
+			"route": "chitiethoadon/collection(/:id)",
+			"$ref": "app/view/HoaDon/ChiTietHoaDonCollectionView",
+		},
 		// {
 		// 	"collectionName": "hanghoa",
 		// 	"route": "hanghoa/model(/:id)",
