@@ -16,35 +16,28 @@
         "type": "number",
         "primary": true
     },
-    "ma": {
-        "type": "string",
-        "length": 255
-    },
-    "ghichu": {
-        "type": "string",
-        "length": 255
-    },
-    "khachhang_id": {
+    "hanghoa_id": {
         "type": "number",
         "required": true
     },
-    "trangthai": {
+    "soluong": {
         "type": "number",
-        "default": 3
+        "required": true
     },
-    "ngaymua": {
-        "type": "datetime"
+    "dongia": {
+        "type": "number"
     },
     "thanhtien": {
         "type": "number"
     },
-    "tongtien": {
-        "type": "number"
+    "giohang_id": {
+        "type": "number",
+        "required": true
     },
-    "khach_hang": {
+    "hanghoa": {
         "type": "dict"
     },
-    "chitiethoadon": {
-        "type": "list"
+    "giohang": {
+        "type": "dict"
     }
 }
