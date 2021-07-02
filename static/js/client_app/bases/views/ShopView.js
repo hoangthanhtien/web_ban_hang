@@ -18,7 +18,7 @@ define(function (require) {
                 dataType: 'json',
                 success: function (data) {
                     console.log("DATA",data);
-                    
+                    self.addComponent(data['objects']);
                 },
                 error: function(request, textStatus, errorThrown) {
                     console.log("ERROR SML")
@@ -28,8 +28,7 @@ define(function (require) {
             });
             this.$el.html(template());
             
-            var item = "<p>Test</p>";
-            $( "#item-gallery" ).append( item );
+            
         	// $("#forget-password").unbind('click').bind('click', function(){
             //     self.getApp().getRouter().navigate("forgot");
         	// });
@@ -41,54 +40,14 @@ define(function (require) {
             // });
             return this;
         },
-       	processLogin: function(){
-			console.log("LoginView Process login");
-       		var username = this.$('[name=username]').val();
-			   var password = this.$('[name=password]').val();
-			   console.log(name);
-			   console.log(password);
-//       		var qrcode = this.getApp().getRouter().getParam("qr");
-       		var qrcode = this.getApp().getParameterUrl("qr", window.location.href);
-       		var data = JSON.stringify({
-                user_name: username,
-       		    password: password
-       		});
-			var self = this;
-			// $.LoadingOverlay("show");
-       		$.ajax({
-       		    url:  self.getApp().serviceURL+'/user/login',
-       		    type: 'post',
-       		    data: data,
-       		    headers: {
-       		    	'content-type': 'application/json'
-       		    },
-	       		beforeSend: function(){
-	    		    $("#loading").removeClass("hidden");
-	    		   },
-	    		complete: function(){
-	 		    	$("#loading").addClass("hidden");
-	 		    },
-       		    dataType: 'json',
-       		    success: function (data) {
-       		    	console.log(data);
-       		    	// $.LoadingOverlay("hide");
-					self.getApp().postLogin(data);
-					// localStorage.setItem("email", data['data']['email']);
-					// localStorage.setItem("fullname", data['data']['fullname']);
-       		    	// if(password === undefined || password===""){
-       		    	// 	self.router.navigate("user/profile");
-       		    	// }
-       		    },
-       		    error: function(request, textStatus, errorThrown) {
-					   //console.log(request);
-					// $.LoadingOverlay("hide");
-       		    	try {
-       		    		self.getApp().notify($.parseJSON(request.responseJSON).error_message);
-       		    	} catch(err) {
-       		    		self.getApp().notify({message: 'Có lỗi xảy ra, vui lòng thử lại sau'},{type: "danger"});
-       		    	}
-       		    }
-       		});
+       	addComponent: function(data){
+            let self = this;
+            $.each(data, function(idx, obj){
+                var item = '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">' + '<div class="single-popular-items mb-50 text-center">' + '<div class="popular-img">' + '<img src="' + obj['image_url'] + '" alt=""><div class="img-cap"><span>Add to cart</span></div><div class="favorit-items"><span class="flaticon-heart"></span></div></div><div class="popular-caption"><h3><a href="product_details.html">'+ obj['ten'] +'</a></h3><span>$ 45,743</span></div></div></div>';	
+                $( "#item-gallery" ).append( item );
+            })
+			
+            
        	},
 
     });
