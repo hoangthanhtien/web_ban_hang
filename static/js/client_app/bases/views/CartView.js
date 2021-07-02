@@ -7,15 +7,45 @@ define(function (require) {
         
         tpl                 = require('text!app/bases/tpl/cart.html'),
         template = _.template(tpl);
+    var schmema = {
+        "id": {
+            "type": "number"
+        },
+        "hanghoa_id": {
+            "type": "number"
+        },
+        "soluong": {
+            "type": "number"
+        },
+        "dongia": {
+            "type": "number"
+        },
+        "thanhtien": {
+            "type": "number"
+        },
+        "giohang_id": {
+          "type": "number"
+        },
+        // "unit": {
+        //   "type": "dict"
+        // },
+        // "price": {
+        //     "type": "number"
+        // },
+        
+        "item_details": {
+            "type": "list"
+        }
+    };
     return Gonrin.View.extend({
         render: function () {
         	var self = this;
             var user_cart_id = localStorage.getItem('user_cart_id');
-            var url = self.getApp().serviceURL+'/api/v1/chitietgiohang';
+            var url = self.getApp().serviceURL+'/api/v1/get_cart_details';
             $.ajax({
                 url:  url,
                 data: {
-                    'giohang_id': user_cart_id
+                    'cart_id': user_cart_id
                 },  
                 dataType: 'json',
                 success: function (data) {
@@ -37,7 +67,7 @@ define(function (require) {
             var user_cart_id = localStorage.getItem('user_cart_id');
             $.each(data, function(idx, obj){
                 var thanhtien = 100;
-                var item = '<tr><td><div class="media"><div class="d-flex"><img src="'+ obj['hanghoa']['id'] + '" alt="" /></div><div class="media-body"><p>' + obj['hanghoa']['ten'] + '</p></div></div></td><td><h5>$' + obj['dongia'] + '</h5><td><div class="product_count"><span class="input-number-decrement"> <i class="ti-minus"></i></span><input class="input-number" type="text" value="1" min="0" max="10"><span class="input-number-increment"> <i class="ti-plus"></i></span></div></td><td><h5>$' + obj['dongia'] +'</h5></td></tr>';
+                var item = '<tr><td><div class="media"><div class="d-flex"><img src="'+ obj['hanghoa']['id'] + '" alt="" /></div><div class="media-body"><p>' + obj['hanghoa']['ten'] + '</p></div></div></td><td><h5>$' + obj['dongia'] + '</h5><td><div class="product_count"><span class="input-number-decrement"> <i class="ti-minus"></i></span><input class="input-number" type="text" value="1" min="0" max="10"><span class="input-number-increment"> <i class="ti-plus"></i></span></div></td><td><h5>$' + obj['dongia'] +'</h5></td></tr><tr style="display: none;"><input  value="id" ></tr>';
                 $( "#grid_list_item" ).append( item );
                 
             })
