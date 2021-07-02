@@ -12,7 +12,7 @@ define(function (require) {
         	var self = this;
             
             var url = self.getApp().serviceURL+'/api/v1/hanghoa';
-            console.log("SHOP now", url)
+            console.log("SHOP now", url, self.getApp().currentUser)
             $.ajax({
                 url:  url,
                 dataType: 'json',
@@ -43,7 +43,7 @@ define(function (require) {
        	addComponent: function(data){
             let self = this;
             $.each(data, function(idx, obj){
-                var item = '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">' + '<div class="single-popular-items mb-50 text-center">' + '<div class="popular-img">' + '<img src="' + obj['image_url'] + '" alt=""><div class="img-cap"><span>Add to cart</span></div><div class="favorit-items"><span class="flaticon-heart"></span></div></div><div class="popular-caption"><h3><a href="product_details.html">'+ obj['ten'] +'</a></h3><span>$ 45,743</span></div></div></div>';	
+                var item = '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">' + '<div class="single-popular-items mb-50 text-center">' + '<div class="popular-img">' + '<img src="' + obj['image_url'] + '" alt=""><div class="img-cap"><span>Add to cart</span></div><div class="favorit-items"><span class="flaticon-heart"></span></div></div><div class="popular-caption"><h3><a href="product_details.html">'+ obj['ten'] +'</a></h3><span>$ '+ obj['gia'] +'</span></div></div></div>';	
                 $( "#item-gallery" ).append( item );
             })
 			
