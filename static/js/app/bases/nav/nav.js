@@ -43,16 +43,16 @@ define(function (require) {
 			// "route":"procurement_group_by_time/collection", 
 			"entries": [
 				{
-					"text":"Đơn quà tặng",
+					"text":"Đơn bán hàng",
 					// "icon":"cil-calendar",
 					"type":"view",
-					"route":"salesorder/collection"
+					"route":"hoadon/collection"
 				},
 				{
-					"text":"Đơn theo kỳ",
+					"text":"Đơn mua",
 					// "icon":"cil-calendar",
 					"type":"view",
-					"route":"procurement_group_by_time_invoice/collection"
+					"route":"hoadon/collection"
 				},
 			]
 		},

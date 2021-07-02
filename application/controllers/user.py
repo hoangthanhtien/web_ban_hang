@@ -5,8 +5,17 @@ from application.server import app
 from application.database import db
 from application.extensions import auth
 
-from application.models.model import User, Role
+from application.models.model import User, GioHang 
 
+async def create_cart_for_user(user_id):
+    user_cart = db.session.query(GioHang).filter(GioHang.khach_hang_id == user_id).first()
+    if user_cart is None:
+        # Tạo mới giỏ hàng của user
+        new_user_cart = GioHang()
+        new_user_cart.khach_hang_id = user_id
+        new_user_cart.tongtien = 0 
+        db.session.add(new_user_cart)
+        db.session.commit()
 @app.route("/user_test")
 async def user_test(request):
     return text("user_test api")
@@ -21,6 +30,7 @@ async def user_login(request):
         user = db.session.query(User).filter(User.user_name == user_name).first()
         if (user is not None) and auth.verify_password(password, user.password, user.salt):
             auth.login_user(request, user)
+            await create_cart_for_user(user_id=user.id)
             return json({"id": user.id, "user_name": user.user_name, "full_name": user.full_name})
         return json({"error_code":"LOGIN_FAILED","error_message":"user does not exist or incorrect password"}, status=520)
 
