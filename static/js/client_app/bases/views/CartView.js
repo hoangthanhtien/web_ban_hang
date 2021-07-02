@@ -5,17 +5,18 @@ define(function (require) {
         _                   = require('underscore'),
         Gonrin            	= require('gonrin'),
         
-        tpl                 = require('text!app/bases/tpl/shop.html'),
+        tpl                 = require('text!app/bases/tpl/cart.html'),
         template = _.template(tpl);
     return Gonrin.View.extend({
         render: function () {
         	var self = this;
-            
-            var url = self.getApp().serviceURL+'/api/v1/hanghoa';
-            console.log("SHOP now", url, self.getApp().currentUser)
-            
+            var user_cart_id = localStorage.getItem('user_cart_id');
+            var url = self.getApp().serviceURL+'/api/v1/chitietgiohang';
             $.ajax({
                 url:  url,
+                data: {
+                    'giohang_id': user_cart_id
+                },  
                 dataType: 'json',
                 success: function (data) {
                     console.log("DATA",data);
@@ -28,36 +29,27 @@ define(function (require) {
                 }
             });
             this.$el.html(template());
-            
-            
-        	// $("#forget-password").unbind('click').bind('click', function(){
-            //     self.getApp().getRouter().navigate("forgot");
-        	// });
 
-            // console.log("Login view render");
-            // this.$el.find("#login-form").unbind("submit").bind("submit", function(){
-            // 	self.processLogin();
-            // 	return false;
-            // });
             return this;
         },
        	addComponent: function(data){
             let self = this;
             var user_cart_id = localStorage.getItem('user_cart_id');
             $.each(data, function(idx, obj){
-                var item = '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">' + '<div class="single-popular-items mb-50 text-center">' + '<div class="popular-img">' + '<img src="' + obj['image_url'] + '" alt=""><div class="img-cap"><span class="add_to_cart">Add to cart<p style="display: none;">'+ obj['id'] +'</p><p style="display: none;">'+ obj['gia'] +'</p></span></div><div class="favorit-items"><span class="flaticon-heart"></span></div></div><div class="popular-caption"><h3><a href="#">'+ obj['ten'] +'</a></h3><span>$ '+ obj['gia'] +'</span></div></div></div>';	
-                $( "#item-gallery" ).append( item );
+                var thanhtien = 100;
+                var item = '<tr><td><div class="media"><div class="d-flex"><img src="'+ obj['hanghoa']['id'] + '" alt="" /></div><div class="media-body"><p>' + obj['hanghoa']['ten'] + '</p></div></div></td><td><h5>$' + obj['dongia'] + '</h5><td><div class="product_count"><span class="input-number-decrement"> <i class="ti-minus"></i></span><input class="input-number" type="text" value="1" min="0" max="10"><span class="input-number-increment"> <i class="ti-plus"></i></span></div></td><td><h5>$' + obj['dongia'] +'</h5></td></tr>';
+                $( "#grid_list_item" ).append( item );
                 
             })
-            var currentUser = self.getApp().currentUser;
-            if (currentUser){
-                $(".add_to_cart").on("click", function( event ) {
-                    var item_id = $(this).find("p").eq(0).html(),
-                        price = $(this).find("p").eq(1).html();
-                    self.addToCart(item_id,price);
-                });
-            }
-			
+
+            var total_tpl = '<tr><td></td><td></td><td><h5>Subtotal</h5></td><td><h5 id="sub_total">$ 9999</h5></td></tr>';
+            $( "#grid_list_item" ).append( total_tpl );
+
+			// $(".add_to_cart").on("click", function( event ) {
+            //     var item_id = $(this).find("p").eq(0).html(),
+            //         price = $(this).find("p").eq(1).html();
+            //     self.addToCart(item_id,price);
+            // });
             
        	},
         addToCart: function(item_id,price){
@@ -77,7 +69,7 @@ define(function (require) {
                 dataType: "json",
                 success: function(data){
                     console.log("DATA", data)
-                    self.getApp().notify("Đã thêm vào giỏ hàng");
+                    
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     // self.getApp().notify({ message: "Get receipt error!" }, { type: "danger" });
