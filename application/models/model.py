@@ -160,12 +160,14 @@ class HoaDon(CommonModel):
         thanhtien: Thành tiền, sau khi đã tính thuế, hoặc chiết khấu (nếu có)
         tongtien: Tổng tiền trong hóa đơn chưa trừ thuế
         chitiethoadon: relationship đến các mặt hàng trong hóa đơn
+        trangthai: 1 - thành công, 2- hủy, 3 - chờ xử lý
     """
     __tablename__ = 'hoadon'
     id = db.Column(Integer, primary_key=True)
     ma = db.Column(String(255), unique=True)
     ghichu = db.Column(String(255))
     khachhang_id = db.Column(Integer, ForeignKey('users.id'), nullable=False)
+    trangthai = db.Column(Integer,default = 3)
     # tenkhachhang = db.Column(String(255))
     khach_hang = db.relationship("User")
     ngaymua = db.Column(DateTime)
