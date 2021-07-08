@@ -18,7 +18,8 @@ from application.database.model import CommonModel, default_uuid
 
 
 roles_users = db.Table('roles_users',
-                       db.Column('user_id', Integer, db.ForeignKey('users.id', ondelete='cascade'), primary_key=True),
+                       db.Column('user_id', Integer, db.ForeignKey(
+                           'users.id', ondelete='cascade'), primary_key=True),
                        db.Column('role_id', Integer, db.ForeignKey('role.id', onupdate='cascade'), primary_key=True))
 
 
@@ -35,6 +36,7 @@ class Role(CommonModel):
     role_name = db.Column(String(100), index=True, nullable=False, unique=True)
     display_name = db.Column(String(255), nullable=False)
     description = db.Column(String(255))
+
 
 class User(CommonModel):
     """ Người dùng
@@ -75,7 +77,7 @@ class User(CommonModel):
 #     ten = db.Column(String(255), nullable=False)
 #     mota = db.Column(String(255), nullable=True)
 #     tinhthanh = db.relationship("TinhThanh", order_by="TinhThanh.id", cascade="all, delete-orphan")
-    
+
 # class TinhThanh(CommonModel):
 #     __tablename__ = 'tinhthanh'
 #     id = db.Column(Integer, primary_key=True)
@@ -95,6 +97,7 @@ class User(CommonModel):
 #     email = db.Column(String(255))
 #     diachi = db.Column(String(255))
 
+
 class LoaiGianHang(CommonModel):
     """Loại gian hàng
 
@@ -104,6 +107,7 @@ class LoaiGianHang(CommonModel):
     __tablename__ = 'loaigianhang'
     id = db.Column(Integer, primary_key=True)
     ten_loaigianhang = db.Column(String(255))
+
 
 class GianHang(CommonModel):
     """Gian hàng
@@ -119,10 +123,14 @@ class GianHang(CommonModel):
     id = db.Column(Integer, primary_key=True)
     ma_gian_hang = db.Column(String(255), unique=True)
     ten_gian_hang = db.Column(String(255), nullable=False)
-    loai_gian_hang_id = db.Column(Integer, ForeignKey('loaigianhang.id'), nullable=True)
-    loai_gian_hang = db.relationship("LoaiGianHang", foreign_keys=[loai_gian_hang_id])
-    chu_gian_hang_id = db.Column(Integer, ForeignKey('users.id'), nullable=False)
+    loai_gian_hang_id = db.Column(
+        Integer, ForeignKey('loaigianhang.id'), nullable=True)
+    loai_gian_hang = db.relationship(
+        "LoaiGianHang", foreign_keys=[loai_gian_hang_id])
+    chu_gian_hang_id = db.Column(
+        Integer, ForeignKey('users.id'), nullable=False)
     chu_gian_hang = db.relationship("User", foreign_keys=[chu_gian_hang_id])
+
 
 class HangHoa(CommonModel):
     """Hàng hóa
@@ -144,10 +152,12 @@ class HangHoa(CommonModel):
     gia = db.Column(Integer)
     vat = db.Column(Integer, default=10)
     ghichu = db.Column(String(255))
-    gianhang_uid = db.Column(Integer, ForeignKey('gianhang.id'),nullable=False)
+    gianhang_uid = db.Column(
+        Integer, ForeignKey('gianhang.id'), nullable=False)
     gianhang = db.relationship("GianHang")
-    trang_thai = db.Column(Integer,default=1)
+    trang_thai = db.Column(Integer, default=1)
     image_url = db.Column(String(255))
+
 
 class HoaDon(CommonModel):
     """Hóa đơn
@@ -167,15 +177,18 @@ class HoaDon(CommonModel):
     ma = db.Column(String(255), unique=True)
     ghichu = db.Column(String(255))
     khachhang_id = db.Column(Integer, ForeignKey('users.id'), nullable=False)
-    trangthai = db.Column(String(30),default = "Chờ xử lý")
+    trangthai = db.Column(String(30), default="Chờ xử lý")
     # tenkhachhang = db.Column(String(255))
     khach_hang = db.relationship("User")
     ngaymua = db.Column(DateTime)
+    dia_chi_giao = db.Column(String(255))
 
     thanhtien = db.Column(DECIMAL)
     tongtien = db.Column(DECIMAL)
 
-    chitiethoadon = db.relationship("ChiTietHoaDon", order_by="ChiTietHoaDon.id", cascade="all, delete-orphan", lazy='dynamic')
+    chitiethoadon = db.relationship(
+        "ChiTietHoaDon", order_by="ChiTietHoaDon.id", cascade="all, delete-orphan", lazy='dynamic')
+
 
 class ChiTietHoaDon(CommonModel):
     """
@@ -196,7 +209,7 @@ class ChiTietHoaDon(CommonModel):
     soluong = db.Column(DECIMAL(), nullable=False)
     dongia = db.Column(Integer)
     thanhtien = db.Column(Integer)
-    
+
 
 class ChiTietGioHang(CommonModel):
     __tablename__ = "chitietgiohang"
@@ -209,10 +222,12 @@ class ChiTietGioHang(CommonModel):
     giohang_id = db.Column(Integer, ForeignKey('giohang.id'), nullable=False)
     giohang = db.relationship("GioHang")
 
+
 class GioHang(CommonModel):
     __tablename__ = 'giohang'
     id = db.Column(Integer, primary_key=True)
     khach_hang_id = db.Column(Integer, ForeignKey("users.id"), nullable=False)
     khach_hang = db.relationship("User")
     tongtien = db.Column(Integer)
-    chitietgiohang = db.relationship("ChiTietGioHang", order_by="ChiTietGioHang.id", cascade="all, delete-orphan", lazy='dynamic')
+    chitietgiohang = db.relationship(
+        "ChiTietGioHang", order_by="ChiTietGioHang.id", cascade="all, delete-orphan", lazy='dynamic')
