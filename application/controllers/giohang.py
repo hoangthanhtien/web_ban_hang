@@ -5,7 +5,7 @@ from application.extensions import auth
 from gatco.exceptions import ServerError
 from application.database import db
 from application.server import app
-import json
+from sanic.response import json
 
 def auth_func(request=None, **kw):
     #uid = auth.current_user(request)

@@ -19,7 +19,10 @@ define(function (require) {
 
     uiControl: {
       fields: [
-        
+	      {field:"hanghoa",label:"Mã hàng hóa",textField:"ma"},
+	      {field:"hanghoa",label:"Tên hàng hóa",textField:"ten"},
+	      {field:"hanghoa",label:"Đơn giá",textField:"gia"},
+	      {field:"hanghoa",label:"VAT",textField:"vat"},
       ]
     },
     render: function () {
@@ -28,6 +31,7 @@ define(function (require) {
 //         self.model.set("id", gonrin.uuid());
 //       }
       // console.log("<><><><><>",self.model.get("id"))
+      console.log("itemView rendered")
       this.applyBindings();
 
       self.$el.find("#itemRemove").unbind("click").bind("click", function () {

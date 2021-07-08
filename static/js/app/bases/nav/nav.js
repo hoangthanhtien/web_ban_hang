@@ -16,26 +16,26 @@ define(function (require) {
 			"type":"view",
 			"route":"gianhang/collection"
 		},
-		{
-			"text":"Lịch sử đặt hàng",
-			// "icon":"cil-calendar",
-			"type":"category",
-			// "route":"procurement_group_by_time/collection", 
-			"entries": [
-				{
-					"text":"Đơn quà tặng",
-					// "icon":"cil-calendar",
-					"type":"view",
-					"route":"procurement_group_history/collection"
-				},
-				{
-					"text":"Đơn theo kỳ",
-					// "icon":"cil-calendar",
-					"type":"view",
-					"route":"procurement_group_by_time_history/collection"
-				},
-			]
-		},
+		// {
+		// 	"text":"Lịch sử đặt hàng",
+		// 	// "icon":"cil-calendar",
+		// 	"type":"category",
+		// 	// "route":"procurement_group_by_time/collection", 
+		// 	"entries": [
+		// 		{
+		// 			"text":"Đơn quà tặng",
+		// 			// "icon":"cil-calendar",
+		// 			"type":"view",
+		// 			"route":"procurement_group_history/collection"
+		// 		},
+		// 		{
+		// 			"text":"Đơn theo kỳ",
+		// 			// "icon":"cil-calendar",
+		// 			"type":"view",
+		// 			"route":"procurement_group_by_time_history/collection"
+		// 		},
+		// 	]
+		// },
 		{
 			"text":"Quản lý hoá đơn",
 			// "icon":"cil-calendar",
