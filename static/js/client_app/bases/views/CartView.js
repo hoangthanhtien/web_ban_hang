@@ -7,41 +7,39 @@ define(function (require) {
         
         tpl                 = require('text!app/bases/tpl/cart.html'),
         template = _.template(tpl);
-    var schmema = {
-        "id": {
-            "type": "number"
-        },
-        "hanghoa_id": {
-            "type": "number"
-        },
-        "soluong": {
-            "type": "number"
-        },
-        "dongia": {
-            "type": "number"
-        },
-        "thanhtien": {
-            "type": "number"
-        },
-        "giohang_id": {
-          "type": "number"
-        },
-        // "unit": {
-        //   "type": "dict"
-        // },
-        // "price": {
-        //     "type": "number"
-        // },
+    var schema = require("json!schema/GioHangSchema.json");
+    var detail_tpl = require('text!app/bases/tpl/cart_detail.html');
+    // var schema = {
+    //     "id": {
+    //         "type": "number"
+    //     },
+    //     "hanghoa_id": {
+    //         "type": "number"
+    //     },
+    //     "soluong": {
+    //         "type": "number"
+    //     },
+    //     "dongia": {
+    //         "type": "number"
+    //     },
+    //     "thanhtien": {
+    //         "type": "number"
+    //     },
+    //     "giohang_id": {
+    //       "type": "number"
+    //     },
+  
         
-        "item_details": {
-            "type": "list"
-        }
-    };
+    //     "item_details": {
+    //         "type": "list"
+    //     }
+    // };
     return Gonrin.View.extend({
+        modelSchema: schema,
         render: function () {
         	var self = this;
             var user_cart_id = localStorage.getItem('user_cart_id');
-            var url = self.getApp().serviceURL+'/api/v1/get_cart_details';
+            var url = self.getApp().serviceURL+'/get_cart_details';
             $.ajax({
                 url:  url,
                 data: {
