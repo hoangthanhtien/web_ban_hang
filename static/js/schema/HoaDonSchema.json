@@ -36,6 +36,10 @@
     "ngaymua": {
         "type": "datetime"
     },
+    "dia_chi_giao": {
+        "type": "string",
+        "length": 255
+    },
     "thanhtien": {
         "type": "number"
     },

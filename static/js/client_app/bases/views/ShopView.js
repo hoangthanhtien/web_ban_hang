@@ -45,26 +45,29 @@ define(function (require) {
             let self = this;
             var user_cart_id = localStorage.getItem('user_cart_id');
             $.each(data, function(idx, obj){
-                var item = '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">' + '<div class="single-popular-items mb-50 text-center">' + '<div class="popular-img">' + '<img src="' + obj['image_url'] + '" alt=""><div class="img-cap"><span class="add_to_cart">Add to cart<p style="display: none;">'+ obj['id'] +'</p><p style="display: none;">'+ obj['gia'] +'</p></span></div><div class="favorit-items"><span class="flaticon-heart"></span></div></div><div class="popular-caption"><h3><a href="#">'+ obj['ten'] +'</a></h3><span>$ '+ obj['gia'] +'</span></div></div></div>';	
+                var item = '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">' + '<div class="single-popular-items mb-50 text-center">' + '<div class="popular-img">' + '<img src="' + obj['image_url'] + '" alt=""><div class="img-cap"><span class="add_to_cart">Add to cart <p style="display: none;">'+ obj['id'] +'</p><p style="display: none;">'+ obj['gia'] +'</p><p style="display: none;">'+ obj['ten'] +'</p></span></div><div class="favorit-items"><span class="flaticon-heart"></span></div></div><div class="popular-caption"><h3><a href="#">'+ obj['ten'] +'</a></h3><span>$ '+ obj['gia'] +'</span></div></div></div>';	
                 $( "#item-gallery" ).append( item );
                 
             })
             var currentUser = self.getApp().currentUser;
             if (currentUser){
                 $(".add_to_cart").on("click", function( event ) {
+                    console.log("May da click")
                     var item_id = $(this).find("p").eq(0).html(),
-                        price = $(this).find("p").eq(1).html();
-                    self.addToCart(item_id,price);
+                        price = $(this).find("p").eq(1).html(),
+                        name = $(this).find("p").eq(2).html();
+                    self.addToCart(item_id,price,name);
                 });
             }
 			
             
        	},
-        addToCart: function(item_id,price){
+        addToCart: function(item_id,price,name){
             let self = this;
             var user_cart_id = localStorage.getItem('user_cart_id');
             var data_payload = {
                 'hanghoa_id': item_id,
+                'hanghoa_ten': name,
                 'soluong': 1,
                 'dongia': price,
                 'thanhtien': price,

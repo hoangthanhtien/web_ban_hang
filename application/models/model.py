@@ -215,6 +215,7 @@ class ChiTietGioHang(CommonModel):
     __tablename__ = "chitietgiohang"
     id = db.Column(Integer, primary_key=True)
     hanghoa_id = db.Column(Integer, ForeignKey('hanghoa.id'), nullable=False)
+    hanghoa_ten = db.Column(String(255))
     hanghoa = db.relationship("HangHoa")
     soluong = db.Column(DECIMAL(), nullable=False)
     dongia = db.Column(Integer)

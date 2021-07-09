@@ -1,0 +1,31 @@
+<!-- <tr >
+    <td class="text-center" style="padding:5px; "> {{item['item_name']}}</td>
+    <td class="text-center" style="padding:5px;">{{Intl.NumberFormat().format(quantity)}}</td>
+    <td class="text-center" style="padding:5px;">{{unit['unit_name']}}</td>
+    
+</tr> -->
+<tr>
+    <td>
+      <div class="media">
+        <div class="d-flex">
+          <img src="assets/img/gallery/card1.png" alt="" />
+        </div>
+        <div class="media-body">
+          <p>{{ hanghoa_ten }}</p>
+        </div>
+      </div>
+    </td>
+    <td>
+      <h5>$ {{dongia}}</h5>
+    </td>
+    <td>
+      <div class="product_count">
+        <span class="input-number-decrement"> <i class="ti-minus"></i></span>
+        <input class="input-number" type="text" value="1" min="0" max="10">
+        <span class="input-number-increment"> <i class="ti-plus"></i></span>
+      </div>
+    </td>
+    <td>
+      <h5>${{thanhtien}}</h5>
+    </td>
+  </tr>
