@@ -203,7 +203,7 @@ class ChiTietHoaDon(CommonModel):
     __tablename__ = 'chitiethoadon'
     id = db.Column(Integer, primary_key=True)
     hoadon_id = db.Column(Integer, ForeignKey('hoadon.id'), nullable=False)
-
+    hoadon = db.relationship("HoaDon")
     hanghoa_id = db.Column(Integer, ForeignKey('hanghoa.id'), nullable=False)
     hanghoa = db.relationship("HangHoa")
     soluong = db.Column(DECIMAL(), nullable=False)
