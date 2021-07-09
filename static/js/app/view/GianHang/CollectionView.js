@@ -31,28 +31,6 @@ define(function (require) {
               self.getApp().getRouter().navigate(path);
             },
           },
-          // {
-          //   name: "update",
-          //   type: "button",
-          //   buttonClass: "btn-primary btn-lg",
-          //   label: "Chỉnh sửa",
-          //   command: function () {
-          //     var self = this;
-          //     var path = self.collectionName + "/model";
-          //     self.getApp().getRouter().navigate(path);
-          //   },
-          // },
-          // {
-          //   name: "delete",
-          //   type: "button",
-          //   buttonClass: "btn-danger btn-lg",
-          //   label: "Xóa",
-          //   command: function () {
-          //     var self = this;
-          //     var path = self.collectionName + "/model";
-          //     self.getApp().getRouter().navigate(path);
-          //   },
-          // },
         ],
       },
     ],
@@ -94,6 +72,10 @@ define(function (require) {
     render: function () {
       let self = this;
       let createButton = this.$el.find("[name=create]");
+      let currentUser = self.getApp().currentUser;
+      let currentUserId = currentUser.id;
+      self.uiControl.filters = {chu_gian_hang_id:{$eq:currentUserId}}
+      console.log("uiControl",self.uiControl)
       console.log("createButton", createButton);
       console.log("Đã vào collection view gianhang");
       this.applyBindings();

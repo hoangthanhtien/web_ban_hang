@@ -40,11 +40,18 @@ define(function (require) {
 			"route": "chitiethoadon/collection(/:id)",
 			"$ref": "app/view/HoaDon/ChiTietHoaDonCollectionView",
 		},
-		// {
-		// 	"collectionName": "hanghoa",
-		// 	"route": "hanghoa/model(/:id)",
-		// 	"$ref": "app/view/HangHoa/ModelView",
-		// },
+		////////////////////// Báo cáo tổng hợp 
+		{
+			"collectionName": "baocaotonghop", 
+			"route": "baocaotonghop/collection(/:id)",
+			"$ref": "app/view/BaoCaoTongHop/CollectionView",
+		},
+		////////////////////// Báo cáo doanh số 
+		{
+			"collectionName": "baocaodoanhso", 
+			"route": "doanhso/collection(/:id)",
+			"$ref": "app/view/BaoCaoDoanhSo/CollectionView",
+		},
 	];
 
 });

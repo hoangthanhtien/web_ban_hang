@@ -27,12 +27,17 @@ define(function (require) {
           field: "id",
           label: "Mã hóa đơn",
         },
-        { field: "khach_hang", label: "Tên khách hàng", textField: "full_name" },
+        {
+          field: "khach_hang",
+          label: "Tên khách hàng",
+          textField: "full_name",
+        },
         { field: "khach_hang", label: "SĐT", textField: "phone" },
         { field: "khach_hang", label: "Email", textField: "email" },
         { field: "ngaymua", label: "Ngày mua" },
         { field: "thanhtien", label: "Thành tiền" },
         { field: "tongtien", label: "Tổng tiền" },
+        { field: "dia_chi_giao", label: "Địa chỉ giao hàng" },
         { field: "ghichu", label: "Ghi chú" },
         { field: "trangthai", label: "Trạng thái" },
       ],
@@ -44,7 +49,10 @@ define(function (require) {
       },
     },
     render: function () {
-      console.log("Hoa don collectionview rendered");
+      let self = this;
+      let currentUser = self.getApp().currentUser;
+      let currentUserId = currentUser.id;
+      self.uiControl.filters = { khachhang_id: { $eq: currentUserId } };
       this.applyBindings();
       return this;
     },

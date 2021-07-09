@@ -1,4 +1,4 @@
-from random import random
+import random
 import string
 from gatco.response import json, text
 from application.server import app
